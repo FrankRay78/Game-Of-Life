@@ -12,16 +12,18 @@ namespace Game_Of_Life
     class Program
     {
         const int WAIT = 500;
-        const string SPINNER = "/-\\|";
+        const string SPINNER = "/―\\|"; //Use a unicode bar character rather than the ASCII equavalent
 
         static void Main(string[] args)
         {
             int index = 0;
             bool keepGoing = true;
 
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             do
             {
-                Console.SetCursorPosition(0, 0);
+                Console.SetCursorPosition(1, 1);
 
                 Console.WriteLine(SPINNER[index]);
 
