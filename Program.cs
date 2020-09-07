@@ -12,9 +12,53 @@ namespace Game_Of_Life
     class Program
     {
         const int WAIT = 500;
-        const string SPINNER = "/―\\|"; //Use a unicode bar character rather than the ASCII equavalent
 
         static void Main(string[] args)
+        {
+            //DrawSpinner();
+
+            DrawRandomisedCanvas();
+        }
+
+
+        #region Randomised output on fixed dimension canvas example
+
+        const int CANVAS_WIDTH = 10;
+        const int CANVAS_HEIGHT = 10;
+
+        static void DrawRandomisedCanvas()
+        {
+            int x, y;
+            Random r = new Random();
+            bool keepGoing = true;
+
+            do
+            {
+                x = r.Next(CANVAS_WIDTH - 1); //zero based canvas dimensions, ie. 0 to CANVAS_WIDTH - 1
+                y = r.Next(CANVAS_HEIGHT - 1); //zero based canvas dimensions, ie. 0 to CANVAS_HEIGHT - 1
+
+                Console.SetCursorPosition(x, y);
+
+                Console.Write('1');
+
+                Thread.Sleep(WAIT);
+
+                if (Console.KeyAvailable)
+                {
+                    //break out of the while loop and terminate the console
+                    keepGoing = false;
+                }
+            } while (keepGoing);
+        }
+
+        #endregion
+
+
+        #region Simple spinner example
+
+        const string SPINNER = "/―\\|"; //Use a unicode bar character rather than the ASCII equavalent
+
+        static void DrawSpinner()
         {
             int index = 0;
             bool keepGoing = true;
@@ -40,5 +84,7 @@ namespace Game_Of_Life
                 }
             } while (keepGoing);
         }
+
+        #endregion
     }
 }
