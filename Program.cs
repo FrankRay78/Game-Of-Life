@@ -28,17 +28,25 @@ namespace Game_Of_Life
 
         static void DrawRandomisedCanvas()
         {
-            int x, y;
+            int x = 0; 
+            int y = 0;
+
             Random r = new Random();
             bool keepGoing = true;
 
+            Console.CursorVisible = false;
+
             do
             {
+                //Clear the previous character written
+                Console.SetCursorPosition(x, y);
+                Console.Write(' ');
+
+                //New x, y coordinates
                 x = r.Next(CANVAS_WIDTH - 1); //zero based canvas dimensions, ie. 0 to CANVAS_WIDTH - 1
-                y = r.Next(CANVAS_HEIGHT - 1); //zero based canvas dimensions, ie. 0 to CANVAS_HEIGHT - 1
+                y = r.Next(CANVAS_HEIGHT - 1); //ditto
 
                 Console.SetCursorPosition(x, y);
-
                 Console.Write('1');
 
                 Thread.Sleep(WAIT);
