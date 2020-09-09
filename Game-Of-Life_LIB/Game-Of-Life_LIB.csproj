@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Life.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

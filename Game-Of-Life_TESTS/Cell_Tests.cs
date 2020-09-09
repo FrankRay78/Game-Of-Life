@@ -77,56 +77,5 @@ namespace Game_Of_Life_TESTS
 
             Assert.AreEqual("0", c.ToString());
         }
-
-
-
-        //[TestMethod]
-        //public void SingleDeadCellinMiddleofDead3x3Grid()
-        //{
-        //    var grid = new int[3, 3]; //should be 0 - 2, on both axes
-
-        //    int x = 1;
-        //    int y = 1;
-
-        //    Cell c = new Cell(x, y, grid);
-
-        //    Assert.AreEqual(0, c.Alive);
-
-        //    c.UpdateState();
-
-        //    Assert.AreEqual(0, c.Alive);
-        //}
-
-        //[TestMethod]
-        //public void SingleAliveCellinMiddleofDead3x3Grid()
-        //{
-        //    var grid = new int[3, 3]; //should be 0 - 2, on both axes
-
-        //    int x = 1;
-        //    int y = 1;
-
-        //    Cell c = new Cell(x, y, grid);
-
-        //    //Mark the cell as alive initially
-        //    grid[x, y] = 1;
-
-        //    Assert.AreEqual(1, c.Alive);
-
-        //    c.UpdateState();
-
-        //    Assert.AreEqual(0, c.Alive);
-        //}
-
-        ////Blocks are static (ie. don't change during generations):
-        ////0000
-        ////0110
-        ////0110
-        ////0000
-        //[TestMethod]
-        //public void TopLeftAliveCellinBlock()
-        //{
-        //    //TODO
-        //    throw new NotImplementedException();
-        //}
     }
 }

@@ -12,8 +12,8 @@ namespace Game_Of_Life
 
     class Program
     {
-        public const string ALIVE_PRINT_CHARACTERS = "\u25A0";
-        public const string DEAD_PRINT_CHARACTERS = " ";
+        public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0";
+        public const string DEAD_CELL_PRINT_CHARACTERS = " ";
 
         const int GRID_WIDTH = 5;
         const int GRID_HEIGHT = 5;
@@ -34,6 +34,7 @@ namespace Game_Of_Life
 
             //Draw the starting life and pause until the user signals to start
             Console.SetCursorPosition(0, 0);
+            //TODO: Console.Write(life.ToString().Replace("1", ALIVE_CELL_PRINT_CHARACTERS).Replace("0", DEAD_CELL_PRINT_CHARACTERS));
             Console.Write(life.ToString());
             Console.ReadLine();
 

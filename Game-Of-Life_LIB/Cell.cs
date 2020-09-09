@@ -22,7 +22,7 @@ namespace Game_Of_Life_LIB
 
         public void UpdateState()
         {
-            //TODO
+            //TODO: implement Cell.UpdateState()
         }
 
         public override string ToString()

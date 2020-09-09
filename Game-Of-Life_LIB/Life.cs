@@ -47,21 +47,7 @@ namespace Game_Of_Life_LIB
 
         public override string ToString()
         {
-            var sb = new StringBuilder();
-
-            for (int y = 0; y < height; y++)
-            {
-                //Add a newline character if we are on the second row or greater
-                if (y > 0)
-                    sb.Append("\n");
-
-                for (int x = 0; x < width; x++)
-                {
-                    sb.Append(grid[x, y].ToString());
-                }
-            }
-
-            return sb.ToString();
+            return Helper.IntMatrixToString(grid);
         }
     }
 }

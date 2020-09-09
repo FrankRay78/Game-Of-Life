@@ -45,5 +45,18 @@ namespace Game_Of_Life_TESTS
 
             Assert.AreEqual(expectedOuput, l.ToString());
         }
+
+        [TestMethod]
+        public void FullyAlive3x3Life()
+        {
+            var expectedOuput = "111\n111\n111";
+
+            int x = 3;
+            int y = 3;
+
+            var l = new Life(x, y);
+
+            Assert.AreEqual(expectedOuput, l.ToString());
+        }
     }
 }
