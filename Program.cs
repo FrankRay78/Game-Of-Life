@@ -8,7 +8,7 @@ using Game_Of_Life_LIB;
 
 namespace Game_Of_Life
 {
-    //https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+    //ref: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
     class Program
     {

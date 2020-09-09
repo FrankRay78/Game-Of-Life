@@ -21,9 +21,9 @@ namespace Game_Of_Life_LIB
             grid = new int[width, height];
         }
 
-        public Life(string gridAsString)
+        public Life(string startingPattern)
         {
-            grid = Helper.StringToIntMatrix(gridAsString);
+            grid = Helper.StringToIntMatrix(startingPattern);
 
             this.width = grid.GetLength(0);
             this.height = grid.GetLength(1);
@@ -35,9 +35,7 @@ namespace Game_Of_Life_LIB
             {
                 for (int x = 0; x < width; x++)
                 {
-                    var c = new Cell(x, y, grid);
-
-                    c.UpdateState();
+                    Cell.UpdateState(x, y, grid);
                 }
             }
         }
