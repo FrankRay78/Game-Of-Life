@@ -15,25 +15,48 @@ namespace Game_Of_Life
         public const string ALIVE_PRINT_CHARACTERS = "\u25A0";
         public const string DEAD_PRINT_CHARACTERS = " ";
 
-        const int GRID_WIDTH = 10;
-        const int GRID_HEIGHT = 10;
+        const int GRID_WIDTH = 5;
+        const int GRID_HEIGHT = 5;
 
         const int WAIT = 500; //time between each tick, in ms
 
 
         static void Main(string[] args)
         {
-            Life l = new Life(GRID_WIDTH, GRID_HEIGHT);
+            var life = new Life(GRID_WIDTH, GRID_HEIGHT);
 
 
-            //DrawRandomisedCanvas();
-            //DrawSpinner();
-        }
+            bool keepGoing = true;
+
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.CursorVisible = false;
 
 
-        static void DrawCanvas(int[,] grid)
-        {
-            //TODO:
+            //Draw the starting life and pause until the user signals to start
+            Console.SetCursorPosition(0, 0);
+            Console.Write(life.ToString());
+            Console.ReadLine();
+
+            do
+            {
+                life.UpdateState();
+
+
+                //Splat an entirely updated cavas, each and every time, on to the console
+                //TODO: consider writing only changes to a buffer and pushing this instead
+
+                Console.SetCursorPosition(0, 0);
+
+                Console.Write(life.ToString());
+
+                Thread.Sleep(WAIT);
+
+                if (Console.KeyAvailable)
+                {
+                    //break out of the while loop and terminate the console
+                    keepGoing = false;
+                }
+            } while (keepGoing);
         }
 
 
