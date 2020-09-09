@@ -56,7 +56,7 @@ namespace Game_Of_Life_TESTS
         [TestMethod]
         public void Oscillator_Blinker()
         {
-            var startingPattern = "00000\n00000\n01110\n00000\n00000";
+            var startingPattern = "00000\n00000\n01110\n00000\n00000"; //Oscillator_Blinker
             var expected1 = "00000\n00000\n01110\n00000\n00000";
             var expected2 = "00000\n00100\n00100\n00100\n00000";
 

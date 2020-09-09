@@ -49,7 +49,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cell_Tests.cs" />
     <Compile Include="Example-Pattern-Tests.cs" />
     <Compile Include="Life_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

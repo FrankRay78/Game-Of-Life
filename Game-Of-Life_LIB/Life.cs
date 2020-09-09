@@ -31,13 +31,17 @@ namespace Game_Of_Life_LIB
 
         public void UpdateState()
         {
+            int[,] nextGenerationGrid = (int[,])grid.Clone();
+
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    Cell.UpdateState(x, y, grid);
+                    Cell.UpdateState(x, y, grid, nextGenerationGrid);
                 }
             }
+
+            grid = nextGenerationGrid;
         }
 
         public override string ToString()

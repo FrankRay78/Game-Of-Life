@@ -13,7 +13,7 @@ namespace Game_Of_Life
     class Program
     {
         public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0";
-        public const string DEAD_CELL_PRINT_CHARACTERS = " ";
+        public const string DEAD_CELL_PRINT_CHARACTERS = "-";
 
         const int GRID_WIDTH = 5;
         const int GRID_HEIGHT = 5;
@@ -23,12 +23,17 @@ namespace Game_Of_Life
 
         static void Main(string[] args)
         {
-            string startingPattern = "010010\n101000\n110000";
+            string startingPattern = "" +
+                "00000\n" +
+                "00000\n" +
+                "01110\n" +
+                "00000\n" +
+                "00000"; //Oscillator_Blinker
 
-            //var life = new Life(GRID_WIDTH, GRID_HEIGHT);
             var life = new Life(startingPattern);
 
 
+            int generation = 0;
             bool keepGoing = true;
 
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -36,19 +41,23 @@ namespace Game_Of_Life
 
 
             //Draw the starting life and pause until the user signals to start
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 2);
             Console.Write(life.ToString(ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS));
             Console.ReadLine();
 
             do
             {
                 life.UpdateState();
+                generation++;
+
+                Console.SetCursorPosition(0, 0);
+                Console.Write(generation);
 
 
                 //Splat an entirely updated cavas, each and every time, on to the console
                 //TODO: consider writing only changes to a buffer and pushing this instead
 
-                Console.SetCursorPosition(0, 0);
+                Console.SetCursorPosition(0, 2);
 
                 Console.Write(life.ToString(ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS));
 
