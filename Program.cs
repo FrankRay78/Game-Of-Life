@@ -12,9 +12,14 @@ namespace Game_Of_Life
 
     class Program
     {
+        public const string ALIVE_PRINT_CHARACTERS = "\u25A0";
+        public const string DEAD_PRINT_CHARACTERS = " ";
+
         const int GRID_WIDTH = 10;
         const int GRID_HEIGHT = 10;
+
         const int WAIT = 500; //time between each tick, in ms
+
 
         static void Main(string[] args)
         {

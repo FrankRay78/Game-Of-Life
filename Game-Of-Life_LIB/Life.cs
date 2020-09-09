@@ -51,8 +51,13 @@ namespace Game_Of_Life_LIB
 
             for (int y = 0; y < height; y++)
             {
+                //Add a newline character if we are on the second row or greater
+                if (y > 0)
+                    sb.Append("\n");
+
                 for (int x = 0; x < width; x++)
                 {
+                    sb.Append(grid[x, y].ToString());
                 }
             }
 
