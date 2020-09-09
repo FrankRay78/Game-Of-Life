@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Game_Of_Life_LIB;
 
 namespace Game_Of_Life
 {
@@ -11,13 +12,23 @@ namespace Game_Of_Life
 
     class Program
     {
-        const int WAIT = 500;
+        const int GRID_WIDTH = 10;
+        const int GRID_HEIGHT = 10;
+        const int WAIT = 500; //time between each tick, in ms
 
         static void Main(string[] args)
         {
-            //DrawSpinner();
+            Life l = new Life(GRID_WIDTH, GRID_HEIGHT);
 
-            DrawRandomisedCanvas();
+
+            //DrawRandomisedCanvas();
+            //DrawSpinner();
+        }
+
+
+        static void DrawCanvas(int[,] grid)
+        {
+            //TODO:
         }
 
 
@@ -60,7 +71,6 @@ namespace Game_Of_Life
         }
 
         #endregion
-
 
         #region Simple spinner example
 
