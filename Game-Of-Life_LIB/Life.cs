@@ -12,7 +12,6 @@ namespace Game_Of_Life_LIB
         private readonly int height;
 
         private int[,] grid;
-        private List<Cell> cells;
 
         public Life(int width, int height)
         {
@@ -20,34 +19,41 @@ namespace Game_Of_Life_LIB
             this.height = height;
 
             grid = new int[width, height];
-            cells = new List<Cell>();
+        }
 
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    //Initialise a given grid coordinate and create a respective cell for it too
+        public Life(string gridAsString)
+        {
+            grid = Helper.StringToIntMatrix(gridAsString);
 
-                    grid[x, y] = 0; //Default the cell to dead
-
-                    var c = new Cell(x, y, grid);
-
-                    cells.Add(c);
-                }
-            }
+            this.width = grid.GetLength(0);
+            this.height = grid.GetLength(1);
         }
 
         public void UpdateState()
         {
-            foreach (Cell c in cells)
+            for (int y = 0; y < height; y++)
             {
-                c.UpdateState();
+                for (int x = 0; x < width; x++)
+                {
+                    var c = new Cell(x, y, grid);
+
+                    c.UpdateState();
+                }
             }
         }
 
         public override string ToString()
         {
             return Helper.IntMatrixToString(grid);
+        }
+
+        public string ToString(string alive, string dead)
+        {
+            var output = Helper.IntMatrixToString(grid);
+
+            output = output.Replace("1", alive).Replace("0", dead);
+
+            return output;
         }
     }
 }

@@ -36,27 +36,36 @@ namespace Game_Of_Life_TESTS
         [TestMethod]
         public void Blank3x3Life()
         {
-            var expectedOuput = "000\n000\n000";
+            var expected = "000\n000\n000";
 
             int x = 3;
             int y = 3;
 
             var l = new Life(x, y);
 
-            Assert.AreEqual(expectedOuput, l.ToString());
+            Assert.AreEqual(expected, l.ToString());
         }
 
         [TestMethod]
         public void FullyAlive3x3Life()
         {
-            var expectedOuput = "111\n111\n111";
+            var input = "111\n111\n111";
+            var expected = "111\n111\n111";
 
-            int x = 3;
-            int y = 3;
+            var l = new Life(input);
 
-            var l = new Life(x, y);
+            Assert.AreEqual(expected, l.ToString());
+        }
 
-            Assert.AreEqual(expectedOuput, l.ToString());
+        [TestMethod]
+        public void PartiallyAlive_BadCharacters_RaggedArray_5x5Life()
+        {
+            var input = "0_1\n00001\n11ABC";
+            var expected = "00100\n00001\n11000";
+
+            var l = new Life(input);
+
+            Assert.AreEqual(expected, l.ToString());
         }
     }
 }

@@ -23,7 +23,10 @@ namespace Game_Of_Life
 
         static void Main(string[] args)
         {
-            var life = new Life(GRID_WIDTH, GRID_HEIGHT);
+            string startingPattern = "010010\n101000\n110000";
+
+            //var life = new Life(GRID_WIDTH, GRID_HEIGHT);
+            var life = new Life(startingPattern);
 
 
             bool keepGoing = true;
@@ -34,8 +37,7 @@ namespace Game_Of_Life
 
             //Draw the starting life and pause until the user signals to start
             Console.SetCursorPosition(0, 0);
-            //TODO: Console.Write(life.ToString().Replace("1", ALIVE_CELL_PRINT_CHARACTERS).Replace("0", DEAD_CELL_PRINT_CHARACTERS));
-            Console.Write(life.ToString());
+            Console.Write(life.ToString(ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS));
             Console.ReadLine();
 
             do
@@ -48,7 +50,8 @@ namespace Game_Of_Life
 
                 Console.SetCursorPosition(0, 0);
 
-                Console.Write(life.ToString());
+                Console.Write(life.ToString(ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS));
+
 
                 Thread.Sleep(WAIT);
 

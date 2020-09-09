@@ -88,5 +88,18 @@ namespace Game_Of_Life_TESTS
 
             Assert.AreEqual(expected, output);
         }
+
+        [TestMethod]
+        public void Test_StaggeredArray()
+        {
+            string input = "010010\n101\n11";
+            string expected = "010010\n101000\n110000";
+
+            int[,] g = Helper.StringToIntMatrix(input);
+
+            string output = Helper.IntMatrixToString(g);
+
+            Assert.AreEqual(expected, output);
+        }
     }
 }
