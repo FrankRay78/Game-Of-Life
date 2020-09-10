@@ -44,6 +44,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Life.cs" />
+    <Compile Include="Patterns.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

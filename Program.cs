@@ -15,23 +15,28 @@ namespace Game_Of_Life
         public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0";
         public const string DEAD_CELL_PRINT_CHARACTERS = "-";
 
-        const int GRID_WIDTH = 5;
-        const int GRID_HEIGHT = 5;
+        const int GRID_WIDTH = 30;
+        const int GRID_HEIGHT = 30;
 
         const int WAIT = 500; //time between each tick, in ms
 
 
         static void Main(string[] args)
         {
-            string startingPattern = "" +
-                "00000\n" +
-                "00000\n" +
-                "01110\n" +
-                "00000\n" +
-                "00000"; //Oscillator_Blinker
+            var life = new Life(GRID_WIDTH, GRID_HEIGHT, ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS);
 
-            var life = new Life(startingPattern);
 
+            //Apply patterns
+
+            //life.ApplyPattern(Patterns.Still_Life_Block, 5, 5);
+            //life.ApplyPattern(Patterns.Oscillator_Blinker, 10, 10);
+            
+            //life.ApplyPattern(Patterns.Acorn, 5, 5);
+
+            life.ApplyPattern(Patterns.R_Pentomino, 10, 10);
+
+
+            //Start the game
 
             int generation = 0;
             bool keepGoing = true;
@@ -42,7 +47,7 @@ namespace Game_Of_Life
 
             //Draw the starting life and pause until the user signals to start
             Console.SetCursorPosition(0, 2);
-            Console.Write(life.ToString(ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS));
+            Console.Write(life.ToDisplayString());
             Console.ReadLine();
 
             do
@@ -59,7 +64,7 @@ namespace Game_Of_Life
 
                 Console.SetCursorPosition(0, 2);
 
-                Console.Write(life.ToString(ALIVE_CELL_PRINT_CHARACTERS, DEAD_CELL_PRINT_CHARACTERS));
+                Console.Write(life.ToDisplayString());
 
 
                 Thread.Sleep(WAIT);

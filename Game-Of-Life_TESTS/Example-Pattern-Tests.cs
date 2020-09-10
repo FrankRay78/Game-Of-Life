@@ -21,7 +21,7 @@ namespace Game_Of_Life_TESTS
             var life = new Life(startingPattern);
 
             var expected = "0000\n0110\n0110\n0000";
-            
+
             Assert.AreEqual(expected, life.ToString());
 
             life.UpdateState();
@@ -71,6 +71,53 @@ namespace Game_Of_Life_TESTS
             life.UpdateState();
 
             Assert.AreEqual(expected1, life.ToString());
+        }
+        
+
+        [TestMethod]
+        public void Life_10x10_Apply_Plattern_Block()
+        {
+            int x = 10;
+            int y = 10;
+
+            var pattern = Patterns.Still_Life_Block;
+
+            int patternStartX = 1;
+            int patternStartY = 2;
+
+            var expected1 = "0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000";
+            var expected2 = "0000000000\n0000000000\n0110000000\n0110000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000";
+
+            var life = new Life(x, y);
+
+            Assert.AreEqual(expected1, life.ToString());
+
+            life.ApplyPattern(pattern, patternStartX, patternStartY);
+
+            Assert.AreEqual(expected2, life.ToString());
+        }
+
+        [TestMethod]
+        public void Life_20x20_Apply_Oscillator_Blinker()
+        {
+            int x = 10;
+            int y = 10;
+
+            var pattern = Patterns.Oscillator_Blinker;
+
+            int patternStartX = 7;
+            int patternStartY = 9;
+
+            var expected1 = "0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000";
+            var expected2 = "0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000000\n0000000111";
+
+            var life = new Life(x, y);
+
+            Assert.AreEqual(expected1, life.ToString());
+
+            life.ApplyPattern(pattern, patternStartX, patternStartY);
+
+            Assert.AreEqual(expected2, life.ToString());
         }
     }
 }
