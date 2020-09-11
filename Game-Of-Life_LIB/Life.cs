@@ -11,32 +11,26 @@ namespace Game_Of_Life_LIB
         private readonly int width;
         private readonly int height;
 
+        private int generation = 0;
         private int[,] grid;
 
-        private string display_alive;
-        private string display_dead;
+        public int Generation { get => generation; }
+        public int[,] Grid { get => grid; }
 
-
-        public Life(int width, int height, string alive = "1", string dead = " ")
+        public Life(int width, int height)
         {
             this.width = width;
             this.height = height;
 
             grid = new int[width, height];
-
-            display_alive = alive;
-            display_dead = dead;
         }
 
-        public Life(string startingPattern, string alive = "1", string dead = " ")
+        public Life(string startingPattern)
         {
             grid = Helper.StringToIntMatrix(startingPattern);
 
             this.width = grid.GetLength(0);
             this.height = grid.GetLength(1);
-
-            display_alive = alive;
-            display_dead = dead;
         }
 
 
@@ -70,20 +64,13 @@ namespace Game_Of_Life_LIB
             }
 
             grid = nextGenerationGrid;
+
+            generation++;
         }
 
         public override string ToString()
         {
             return Helper.IntMatrixToString(grid);
-        }
-
-        public string ToDisplayString()
-        {
-            var output = Helper.IntMatrixToString(grid);
-
-            output = output.Replace("1", display_alive).Replace("0", display_dead);
-
-            return output;
         }
     }
 }
