@@ -61,31 +61,19 @@ namespace Game_Of_Life_LIB
 
         private static int GetCellState(int x, int y, int[,] grid)
         {
-            int state = 0;
+            int width = grid.GetLength(0);
+            int height = grid.GetLength(1);
 
-            //HACK: TryGet approach is lazy, because we are basically swallowing the exceptions when the references fall off the edge of the grid
-            //TODO: Implement this to check the x, y against the boundaries of the grid, and don't proceed if they are off the edge
-            TryGetCellState(x, y, grid, out state);
+            int state;
+
+            if (x < 0 || y < 0)
+                state = 0;
+            else if (x >= width || y >= height)
+                state = 0;
+            else
+               state = grid[x, y];
 
             return state;
-        }
-
-        private static bool TryGetCellState(int x, int y, int[,] grid, out int state)
-        {
-            state = 0;
-
-            try
-            {
-                state = grid[x, y];
-
-                return true;
-            }
-            catch (Exception)
-            {
-                //Ignore
-            }
-
-            return false;
         }
     }
 }

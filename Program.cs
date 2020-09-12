@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,10 +18,11 @@ namespace Game_Of_Life
         public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0"; //Unicode box character
         public const string DEAD_CELL_PRINT_CHARACTERS = "-";
 
-        const int GRID_WIDTH = 50;
+        const int GRID_WIDTH = 100;
         const int GRID_HEIGHT = 50;
 
-        const int WAIT = 5; //time between each tick, in ms
+        const int WAIT = 100; //time between each tick, in ms
+        const int MAXIMUM_GENERATIONS = 0;
 
         const int Y_OFFSET_WHEN_RENDERING = 2;
 
@@ -35,9 +37,9 @@ namespace Game_Of_Life
             //life.ApplyPattern(Patterns.Still_Life_Block, 5, 5);
             //life.ApplyPattern(Patterns.Oscillator_Blinker, 10, 10);
 
-            //life.ApplyPattern(Patterns.Acorn, 5, 5);
+            life.ApplyPattern(Patterns.Acorn, 50, 25);
 
-            life.ApplyPattern(Patterns.R_Pentomino, 25, 25);
+            //life.ApplyPattern(Patterns.R_Pentomino, 50, 25);
 
 
             //Start the game
@@ -47,14 +49,34 @@ namespace Game_Of_Life
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.CursorVisible = false;
 
-            if (Console.WindowWidth < GRID_WIDTH + 5) Console.WindowWidth = GRID_WIDTH + 5;
-            if (Console.WindowHeight < GRID_HEIGHT + 5) Console.WindowHeight = GRID_HEIGHT + 5;
 
+            //Try and expand the console width and height to accomodate the full gri
+            if (Console.WindowWidth < GRID_WIDTH + 5)
+            {
+                if (GRID_WIDTH + 5 < Console.LargestWindowWidth)
+                    Console.WindowWidth = GRID_WIDTH + 5;
+                else
+                    Console.WindowWidth = Console.LargestWindowWidth;
+            }
+            if (Console.WindowHeight < GRID_HEIGHT + 5)
+            {
+                if (GRID_HEIGHT + 5 < Console.LargestWindowHeight)
+                    Console.WindowHeight = GRID_HEIGHT + 5;
+                else
+                    Console.WindowHeight = Console.LargestWindowHeight;
+            }
 
+            
             //Draw the starting life and pause until the user signals to start
             Console.SetCursorPosition(0, 2);
             RenderGridToConsole(life.Grid);
             Console.ReadLine();
+
+
+            //Diagnostics
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
 
             do
             {
@@ -76,7 +98,19 @@ namespace Game_Of_Life
                     //break out of the while loop and terminate the console
                     keepGoing = false;
                 }
+
+                if (MAXIMUM_GENERATIONS > 0 && life.Generation >= MAXIMUM_GENERATIONS)
+                {
+                    //break out of the while loop and terminate the console
+                    keepGoing = false;
+                }
             } while (keepGoing);
+
+
+            //Diagnostics
+            timer.Stop();
+            var timeTaken = string.Format("{0} minutes, {1} seconds, {2} milliseconds", (int)timer.Elapsed.TotalMinutes, timer.Elapsed.Seconds, timer.Elapsed.Milliseconds); 
+            Debug.WriteLine("Iterations: {0}, Time taken: {1}", life.Generation, timeTaken);
         }
 
         #region Grid Rendering Routines
