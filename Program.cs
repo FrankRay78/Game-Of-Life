@@ -40,6 +40,7 @@ namespace Game_Of_Life
             life.ApplyPattern(Patterns.Acorn, 50, 25);
 
             //life.ApplyPattern(Patterns.R_Pentomino, 50, 25);
+            //life.ApplyPattern(Patterns.R_Pentomino, 50, 25);
 
 
             //Start the game
