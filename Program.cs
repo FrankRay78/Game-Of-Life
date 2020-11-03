@@ -37,7 +37,7 @@ namespace Game_Of_Life
             //life.ApplyPattern(Patterns.Still_Life_Block, 5, 5);
             //life.ApplyPattern(Patterns.Oscillator_Blinker, 10, 10);
 
-            life.ApplyPattern(Patterns.Acorn, 50, 25)
+            life.ApplyPattern(Patterns.Acorn, 50, 25);
 
             //life.ApplyPattern(Patterns.R_Pentomino, 50, 25);
 
