@@ -14,4 +14,4 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 REM packages\OpenCoverToCoberturaConverter.0.3.4\tools\OpenCoverToCoberturaConverter.exe -input:TestResults\coverage.xml -output:TestResults\Cobertura.xml
 REM if %errorlevel% neq 0 exit /b %errorlevel%
 
-packages\ReportGenerator.4.8.0\tools\net47\ReportGenerator.exe -reports:TestResults\OpenCover.xml -targetdir:TestResults\ReportGenerator -reportTypes:"Html;HtmlChart;HtmlSummary;Cobertura;"
+packages\ReportGenerator.4.8.0\tools\net47\ReportGenerator.exe -reports:TestResults\OpenCover.xml -targetdir:TestResults\ReportGenerator -reportTypes:"HtmlInline;HtmlChart;HtmlSummary;Cobertura;"
