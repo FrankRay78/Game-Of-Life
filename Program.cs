@@ -18,8 +18,8 @@ namespace Game_Of_Life
         public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0"; //Unicode box character
         public const string DEAD_CELL_PRINT_CHARACTERS = "-";
 
-        const int GRID_WIDTH = 100;
-        const int GRID_HEIGHT = 50;
+        const int GRID_WIDTH = 50;
+        const int GRID_HEIGHT = 25;
 
         const int WAIT = 100; //time between each tick, in ms
         const int MAXIMUM_GENERATIONS = 0;
@@ -37,9 +37,9 @@ namespace Game_Of_Life
             //life.ApplyPattern(Patterns.Still_Life_Block, 5, 5);
             //life.ApplyPattern(Patterns.Oscillator_Blinker, 10, 10);
 
-            life.ApplyPattern(Patterns.Acorn, 50, 25);
+            //life.ApplyPattern(Patterns.Acorn, 50, 25);
 
-            //life.ApplyPattern(Patterns.R_Pentomino, 50, 25);
+            life.ApplyPattern(Patterns.R_Pentomino, 25, 10);
 
 
             //Start the game
