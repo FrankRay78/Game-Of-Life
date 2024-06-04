@@ -27,6 +27,10 @@ namespace Game_Of_Life
         const int Y_OFFSET_WHEN_RENDERING = 2;
 
 
+        /// <summary>
+        /// The main function
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             var life = new Life(GRID_WIDTH, GRID_HEIGHT);
