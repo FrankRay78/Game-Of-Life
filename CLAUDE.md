@@ -4,37 +4,16 @@ Conway's Game of Life implemented as a C# console application with a retro 80s a
 
 ## Tech Stack
 
-- **Language:** C# targeting .NET Framework 4.7.2
-- **IDE:** Visual Studio 2019
-- **Test framework:** MSTest v1.3.2
-- **Coverage:** OpenCover + ReportGenerator
-
-## Project Structure
-
-```
-Game-Of-Life/           # Console EXE — rendering only (Program.cs)
-Game-Of-Life_LIB/       # Core logic (no UI dependency)
-  Cell.cs               # Conway's rules — stateless, static
-  Life.cs               # Grid + generation management
-  Helper.cs             # String <-> int[,] serialization
-  Patterns.cs           # Named starting patterns (readonly strings)
-Game-Of-Life_TESTS/     # MSTest unit tests
-  Life_Tests.cs
-  Helper_Tests.cs
-  Example-Pattern-Tests.cs
-```
+- **Language:** C# targeting .NET 10
+- **Test framework:** MSTest v3.x
+- **Build/test:** `dotnet` CLI
 
 ## Build & Test
 
-`build.bat` runs the full pipeline: NuGet restore → MSBuild → vstest → OpenCover → ReportGenerator.
-
-> ⚠️ Paths in `build.bat` are hardcoded to a specific machine. Update them before running on a new machine.
-
-To build manually with Visual Studio: open `Game-Of-Life.sln` and build in Debug configuration.
-
-To run tests manually:
-```
-vstest.console.exe "Game-Of-Life_TESTS\bin\Debug\Game-Of-Life_TESTS.dll" /TestAdapterPath:"packages\MSTest.TestAdapter.1.3.2"
+```bash
+dotnet build       # build the project
+dotnet test        # run all tests
+dotnet run         # start the simulation
 ```
 
 ## Key Conventions
@@ -57,11 +36,34 @@ vstest.console.exe "Game-Of-Life_TESTS\bin\Debug\Game-Of-Life_TESTS.dll" /TestAd
 
 ## Adding New Patterns
 
-Add a `public static readonly string` to `Game-Of-Life_LIB/Patterns.cs` using the digit-string format:
+Add a `public static readonly string` to `src/Patterns.cs` using the digit-string format:
 ```csharp
-public static readonly string MyPattern =
-    "010\n" +
-    "111\n" +
-    "010";
+namespace GameOfLife.Library
+{
+    public static class Patterns
+    {
+        public static readonly string MyPattern =
+            "010\n" +
+            "111\n" +
+            "010";
+    }
+}
 ```
-Then apply it in `Program.cs` via `life.ApplyPattern(Patterns.MyPattern, startX, startY)`.
+Then apply it in `src/Program.cs` via `life.ApplyPattern(Patterns.MyPattern, startX, startY)`.
+
+## Change Intent Records
+
+Non-obvious decisions made during development are documented as Change Intent Records (CIRs) in `docs/cir/`.
+See [Change Intent Records](https://blog.bryanl.dev/posts/change-intent-records/) for the rationale.
+
+### Template
+
+**Intent:** What was the goal or objective?
+
+**Behaviour:** What are the expected outcomes? (given/when/then)
+
+**Constraints:** What boundaries or guardrails applied?
+
+**Decisions:** What alternatives were considered and rejected, and why?
+
+**Date:** YYYY-MM-DD
