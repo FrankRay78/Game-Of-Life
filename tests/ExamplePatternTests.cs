@@ -6,7 +6,7 @@ namespace GameOfLife.Tests
     //ref: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
     [TestClass]
-    public class Example_Pattern_Tests
+    public class ExamplePatternTests
     {
         [TestMethod]
         public void Still_Life_Block()

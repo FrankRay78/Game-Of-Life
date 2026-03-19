@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GameOfLife.Tests
 {
     [TestClass]
-    public class Helper_Tests
+    public class HelperTests
     {
         [TestMethod]
         public void Test_000()
