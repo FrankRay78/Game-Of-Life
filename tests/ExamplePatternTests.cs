@@ -93,7 +93,7 @@ namespace GameOfLife.Tests
         }
 
         [TestMethod]
-        public void Life_20x20_Apply_Oscillator_Blinker()
+        public void Life_10x10_Apply_Oscillator_Blinker()
         {
             int x = 10;
             int y = 10;
