@@ -16,6 +16,10 @@ dotnet test        # run all tests
 dotnet run         # start the simulation
 ```
 
+## C# Conventions
+
+See [@docs/conventions/csharp.md](docs/conventions/csharp.md) for the full C# coding conventions used in this project.
+
 ## Key Conventions
 
 - **Grid type:** `int[,]` — dimension 0 is **x** (width), dimension 1 is **y** (height)
