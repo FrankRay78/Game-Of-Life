@@ -10,26 +10,26 @@ namespace Game_Of_Life_LIB
 
     public static class Patterns
     {
-        public static string Still_Life_Block =
+        public static readonly string Still_Life_Block =
             "11\n" +
             "11";
 
-        public static string Still_Life_Tub =
+        public static readonly string Still_Life_Tub =
             "010\n" +
             "101\n" +
             "010";
 
-        public static string Oscillator_Blinker =
+        public static readonly string Oscillator_Blinker =
             "111";
 
-        public static string Acorn =
+        public static readonly string Acorn =
             "000000000\n" +
             "001000000\n" +
             "000010000\n" +
             "011001110\n" +
             "000000000";
 
-        public static string R_Pentomino =
+        public static readonly string R_Pentomino =
             "011\n" +
             "110\n" +
             "010";

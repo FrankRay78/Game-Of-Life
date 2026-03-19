@@ -45,12 +45,8 @@ namespace Game_Of_Life_LIB
                 {
                     foreach (char c in s)
                     {
-                        int result;
-
-                        if (int.TryParse(c.ToString(), out result))
-                        {
-                            grid[x, y] = result;
-                        }
+                        if (char.IsDigit(c))
+                            grid[x, y] = c - '0';
 
                         x++;
                     }

@@ -66,12 +66,10 @@ namespace Game_Of_Life_LIB
 
             int state;
 
-            if (x < 0 || y < 0)
-                state = 0;
-            else if (x >= width || y >= height)
+            if (x < 0 || y < 0 || x >= width || y >= height)
                 state = 0;
             else
-               state = grid[x, y];
+                state = grid[x, y];
 
             return state;
         }
