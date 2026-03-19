@@ -18,7 +18,7 @@ dotnet run         # start the simulation
 
 ## C# Conventions
 
-See [@docs/conventions/csharp.md](docs/conventions/csharp.md) for the full C# coding conventions used in this project.
+@docs/conventions/csharp.md
 
 ## Key Conventions
 
