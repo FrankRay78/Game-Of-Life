@@ -8,6 +8,7 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <Deterministic>true</Deterministic>
+    <StartupObject>GameOfLife.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
