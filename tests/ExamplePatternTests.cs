@@ -70,7 +70,7 @@ namespace GameOfLife.Tests
 
 
         [TestMethod]
-        public void Life_10x10_Apply_Plattern_Block()
+        public void Life_10x10_Apply_Pattern_Block()
         {
             int x = 10;
             int y = 10;
