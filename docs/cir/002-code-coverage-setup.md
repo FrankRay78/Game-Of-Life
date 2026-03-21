@@ -7,12 +7,13 @@
 - `coverage/` output is excluded from source control via `.gitignore`
 
 **Constraints:**
-- No new NuGet packages added to the project for coverage; tooling installed globally
+- No new NuGet packages added to the project for coverage; tooling pinned in `.config/dotnet-tools.json` and restored via `dotnet tool restore`
 - `GameOfLife.Program` excluded from coverage metrics — console rendering and `Main` are untestable in unit context
 - `ApplyPattern` out-of-bounds behaviour is pinned as a test fixture, not fixed — a bounds-checking change warrants its own CIR and deliberate decision
 
 **Decisions:**
 - **`dotnet-coverage` over `coverlet.collector`**: `coverlet.collector` (via `dotnet test --collect:"XPlat Code Coverage"`) produced an empty Cobertura XML for this single-project EXE output type on .NET 10. `dotnet-coverage` is the official Microsoft tool, works directly as a process wrapper, and produced correct output immediately.
+- **Local tool manifest over global install**: tools are pinned in `.config/dotnet-tools.json` and restored via `dotnet tool restore`, making them available in CI/CD environments (Linux or otherwise) without global install steps. A global install only exists on the developer's machine and cannot be reproduced on a fresh runner.
 - **Cobertura format over lcov or binary**: Cobertura is human-readable XML with clear `line-rate`/`branch-rate` attributes per class; lcov is opaque without a viewer. Both feed `reportgenerator` if HTML output is needed.
 - **`reportgenerator` over manual XML inspection**: The raw Cobertura XML is sufficient to read numeric rates, but the HTML report provides per-line source annotation that makes gaps immediately visible — worth the one-time global tool install.
 - **MSTest upgraded from 3.11.1 to 4.1.0**: MSTest 3.11.1 has a packaging bug — `MSTestAdapter.PlatformServices.dll` references `TestContext.TestRunDirectoryLabel` which is absent from `TestFramework.dll` in the same 3.11.1 release. This causes a `MissingFieldException` at test execution time. Version 4.1.0 resolves the incompatibility and is the current stable release.
