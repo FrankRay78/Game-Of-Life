@@ -36,6 +36,14 @@
       "Bash(dotnet publish:*)",
       "Bash(dotnet new:*)",
       "Bash(dotnet tool:*)",
+      "Bash(dotnet package:*)",
+      "Bash(dotnet-coverage:*)",
+      "Bash(reportgenerator:*)",
+
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh run view:*)",
 
       "Bash(ls:*)",
       "Bash(find:*)",
