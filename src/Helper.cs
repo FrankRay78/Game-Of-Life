@@ -43,7 +43,9 @@ namespace GameOfLife.Library
                     foreach (char c in s)
                     {
                         if (char.IsDigit(c))
+                        {
                             grid[x, y] = c - '0';
+                        }
 
                         x++;
                     }
