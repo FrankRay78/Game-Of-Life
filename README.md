@@ -15,3 +15,21 @@ dotnet build    # build the project
 dotnet test     # run all tests
 dotnet run      # start the simulation
 ```
+
+## Coverage
+
+Requires two one-time global tool installs:
+
+```bash
+dotnet tool install -g dotnet-coverage
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
+Run tests with coverage collection, then generate the HTML report:
+
+```bash
+dotnet-coverage collect "dotnet test" -f cobertura -o coverage/coverage.cobertura.xml
+reportgenerator "-reports:coverage/coverage.cobertura.xml" "-targetdir:coverage/report" -reporttypes:Html
+```
+
+Open `coverage/report/index.html` to view the results.
