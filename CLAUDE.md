@@ -5,16 +5,10 @@ Conway's Game of Life implemented as a C# console application with a retro 80s a
 ## Tech Stack
 
 - **Language:** C# targeting .NET 10
-- **Test framework:** MSTest v3.x
+- **Test framework:** MSTest v4.x
 - **Build/test:** `dotnet` CLI
 
-## Build & Test
-
-```bash
-dotnet build       # build the project
-dotnet test        # run all tests
-dotnet run         # start the simulation
-```
+See `README.md` for build, test, and coverage commands.
 
 ## C# Conventions
 
