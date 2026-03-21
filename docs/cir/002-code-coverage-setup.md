@@ -3,7 +3,7 @@
 **Behaviour:**
 - Given `dotnet-coverage collect "dotnet test" -f cobertura -o coverage/coverage.cobertura.xml` is run, a non-empty Cobertura XML file is produced
 - Given `reportgenerator` is run against that file, `coverage/report/index.html` opens and shows per-class line and branch rates
-- Given all new tests pass, `Cell.cs`, `Helper.cs`, and `Life.cs` each reach line coverage above 95%
+- Given all new tests pass, `Cell.cs`, `Helper.cs`, and `Life.cs` each reach 100% line and branch coverage
 - `coverage/` output is excluded from source control via `.gitignore`
 
 **Constraints:**
