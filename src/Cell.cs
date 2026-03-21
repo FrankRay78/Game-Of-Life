@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game_Of_Life_LIB
+namespace GameOfLife.Library
 {
     //RULES:
     //1. Any live cell with two or three live neighbours survives.
@@ -51,7 +45,7 @@ namespace Game_Of_Life_LIB
                 {
                     nextGenerationGrid[x, y] = 1; //Condition 2
 
-                    return; 
+                    return;
                 }
             }
 
@@ -66,12 +60,14 @@ namespace Game_Of_Life_LIB
 
             int state;
 
-            if (x < 0 || y < 0)
+            if (x < 0 || y < 0 || x >= width || y >= height)
+            {
                 state = 0;
-            else if (x >= width || y >= height)
-                state = 0;
+            }
             else
-               state = grid[x, y];
+            {
+                state = grid[x, y];
+            }
 
             return state;
         }

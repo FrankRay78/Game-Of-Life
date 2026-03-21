@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game_Of_Life_LIB;
+using GameOfLife.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Game_Of_Life_TESTS
+namespace GameOfLife.Tests
 {
     [TestClass]
-    public class Helper_Tests
+    public class HelperTests
     {
         [TestMethod]
         public void Test_000()

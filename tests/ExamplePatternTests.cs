@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game_Of_Life_LIB;
+using GameOfLife.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Game_Of_Life_TESTS
+namespace GameOfLife.Tests
 {
     //ref: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
     [TestClass]
-    public class Example_Pattern_Tests
+    public class ExamplePatternTests
     {
         [TestMethod]
         public void Still_Life_Block()
@@ -72,10 +67,10 @@ namespace Game_Of_Life_TESTS
 
             Assert.AreEqual(expected1, life.ToString());
         }
-        
+
 
         [TestMethod]
-        public void Life_10x10_Apply_Plattern_Block()
+        public void Life_10x10_Apply_Pattern_Block()
         {
             int x = 10;
             int y = 10;
@@ -98,7 +93,7 @@ namespace Game_Of_Life_TESTS
         }
 
         [TestMethod]
-        public void Life_20x20_Apply_Oscillator_Blinker()
+        public void Life_10x10_Apply_Oscillator_Blinker()
         {
             int x = 10;
             int y = 10;

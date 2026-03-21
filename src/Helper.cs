@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Game_Of_Life_LIB
+namespace GameOfLife.Library
 {
     public static class Helper
     {
@@ -38,18 +35,16 @@ namespace Game_Of_Life_LIB
 
             int x = 0;
             int y = 0;
-            
+
             foreach (string s in strSplit)
             {
                 if (!string.IsNullOrWhiteSpace(s))
                 {
                     foreach (char c in s)
                     {
-                        int result;
-
-                        if (int.TryParse(c.ToString(), out result))
+                        if (char.IsDigit(c))
                         {
-                            grid[x, y] = result;
+                            grid[x, y] = c - '0';
                         }
 
                         x++;

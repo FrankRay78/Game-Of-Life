@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Claude Code local settings (machine-specific overrides)
+.claude/settings.local.json

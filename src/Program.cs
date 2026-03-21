@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Game_Of_Life_LIB;
+using GameOfLife.Library;
 
-namespace Game_Of_Life
+namespace GameOfLife
 {
     /// <summary>
     /// Console implementation of Conway's Game of Life (aka 80's retro style)
@@ -25,6 +22,7 @@ namespace Game_Of_Life
         const int MAXIMUM_GENERATIONS = 0;
 
         const int Y_OFFSET_WHEN_RENDERING = 2;
+        const int WINDOW_PADDING = 5;
 
 
         static void Main(string[] args)
@@ -50,23 +48,23 @@ namespace Game_Of_Life
             Console.CursorVisible = false;
 
 
-            //Try and expand the console width and height to accomodate the full gri
-            if (Console.WindowWidth < GRID_WIDTH + 5)
+            //Try and expand the console width and height to accommodate the full grid
+            if (Console.WindowWidth < GRID_WIDTH + WINDOW_PADDING)
             {
-                if (GRID_WIDTH + 5 < Console.LargestWindowWidth)
-                    Console.WindowWidth = GRID_WIDTH + 5;
+                if (GRID_WIDTH + WINDOW_PADDING < Console.LargestWindowWidth)
+                    Console.WindowWidth = GRID_WIDTH + WINDOW_PADDING;
                 else
                     Console.WindowWidth = Console.LargestWindowWidth;
             }
-            if (Console.WindowHeight < GRID_HEIGHT + 5)
+            if (Console.WindowHeight < GRID_HEIGHT + WINDOW_PADDING)
             {
-                if (GRID_HEIGHT + 5 < Console.LargestWindowHeight)
-                    Console.WindowHeight = GRID_HEIGHT + 5;
+                if (GRID_HEIGHT + WINDOW_PADDING < Console.LargestWindowHeight)
+                    Console.WindowHeight = GRID_HEIGHT + WINDOW_PADDING;
                 else
                     Console.WindowHeight = Console.LargestWindowHeight;
             }
 
-            
+
             //Draw the starting life and pause until the user signals to start
             Console.SetCursorPosition(0, 2);
             RenderGridToConsole(life.Grid);
@@ -109,7 +107,7 @@ namespace Game_Of_Life
 
             //Diagnostics
             timer.Stop();
-            var timeTaken = string.Format("{0} minutes, {1} seconds, {2} milliseconds", (int)timer.Elapsed.TotalMinutes, timer.Elapsed.Seconds, timer.Elapsed.Milliseconds); 
+            var timeTaken = string.Format("{0} minutes, {1} seconds, {2} milliseconds", (int)timer.Elapsed.TotalMinutes, timer.Elapsed.Seconds, timer.Elapsed.Milliseconds);
             Debug.WriteLine("Iterations: {0}, Time taken: {1}", life.Generation, timeTaken);
         }
 
@@ -135,7 +133,7 @@ namespace Game_Of_Life
         /// <summary>
         /// Writing to the console each new generation (irrespective of what has changed) is slow and CPU intensive.
         /// eg: Console.Write(life.ToDisplayString());
-        /// 
+        ///
         /// I'd like to be able to render the deltas so I can effectively speed up the cycle time
         /// The below method aims to do this
         /// </summary>
@@ -154,13 +152,19 @@ namespace Game_Of_Life
                     if (currentCellValue != nextCellValue)
                     {
                         //Cell value has changed between generations
-
                         Console.SetCursorPosition(x, Y_OFFSET_WHEN_RENDERING + y);
-
-                        Console.Write(nextCellValue.ToString().Replace("1", ALIVE_CELL_PRINT_CHARACTERS).Replace("0", DEAD_CELL_PRINT_CHARACTERS));
+                        Console.Write(CellValueToChar(nextCellValue));
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Converts a cell value to its display character(s).
+        /// </summary>
+        private static string CellValueToChar(int cellValue)
+        {
+            return cellValue == 1 ? ALIVE_CELL_PRINT_CHARACTERS : DEAD_CELL_PRINT_CHARACTERS;
         }
 
         #endregion
