@@ -1,3 +1,4 @@
+using System;
 using GameOfLife.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -61,6 +62,58 @@ namespace GameOfLife.Tests
             var l = new Life(input);
 
             Assert.AreEqual(expected, l.ToString());
+        }
+
+        [TestMethod]
+        public void Generation_NewLife_IsZero()
+        {
+            var l = new Life(3, 3);
+
+            Assert.AreEqual(0, l.Generation);
+        }
+
+        [TestMethod]
+        public void Generation_AfterOneUpdateState_IsOne()
+        {
+            var l = new Life(3, 3);
+
+            l.UpdateState();
+
+            Assert.AreEqual(1, l.Generation);
+        }
+
+        [TestMethod]
+        public void Generation_AfterThreeUpdateStates_IsThree()
+        {
+            var l = new Life(3, 3);
+
+            l.UpdateState();
+            l.UpdateState();
+            l.UpdateState();
+
+            Assert.AreEqual(3, l.Generation);
+        }
+
+        [TestMethod]
+        public void Grid_NewLife_HasCorrectDimensions()
+        {
+            // Dimension 0 is x (width), dimension 1 is y (height) — per project convention.
+            var l = new Life(5, 3);
+
+            Assert.AreEqual(5, l.Grid.GetLength(0));
+            Assert.AreEqual(3, l.Grid.GetLength(1));
+        }
+
+        [TestMethod]
+        public void ApplyPattern_PatternExceedsGridBoundary_ThrowsIndexOutOfRangeException()
+        {
+            // ApplyPattern has no bounds check. This test documents the current behaviour
+            // as a fixture: placing a 2x2 pattern at (9,9) on a 10x10 grid throws.
+            // Any future change that adds a guard should update this test intentionally.
+            var l = new Life(10, 10);
+
+            Assert.ThrowsExactly<IndexOutOfRangeException>(() =>
+                l.ApplyPattern(Patterns.Still_Life_Block, 9, 9));
         }
     }
 }
