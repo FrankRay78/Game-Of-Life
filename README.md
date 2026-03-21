@@ -18,18 +18,17 @@ dotnet run      # start the simulation
 
 ## Coverage
 
-Requires two one-time global tool installs:
+Tools are pinned in `.config/dotnet-tools.json`. Restore them once after cloning:
 
 ```bash
-dotnet tool install -g dotnet-coverage
-dotnet tool install -g dotnet-reportgenerator-globaltool
+dotnet tool restore
 ```
 
 Run tests with coverage collection, then generate the HTML report:
 
 ```bash
-dotnet-coverage collect "dotnet test" -f cobertura -o coverage/coverage.cobertura.xml
-reportgenerator "-reports:coverage/coverage.cobertura.xml" "-targetdir:coverage/report" -reporttypes:Html
+dotnet tool run dotnet-coverage collect --settings coverage.settings.xml "dotnet test" -f cobertura -o coverage/coverage.cobertura.xml
+dotnet tool run reportgenerator "-reports:coverage/coverage.cobertura.xml" "-targetdir:coverage/report" -reporttypes:Html
 ```
 
 Open `coverage/report/index.html` to view the results.
