@@ -140,6 +140,7 @@ namespace GameOfLife.Tests
             grid[2, 0] = 1;
             grid[0, 1] = 1;
             var nextGenerationGrid = (int[,])grid.Clone();
+            nextGenerationGrid[1, 1] = 1; // force alive so the write to 0 is observable
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);

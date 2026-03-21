@@ -8,7 +8,7 @@
     </ModulePaths>
     <Sources>
       <Include>
-        <Source>.*\\src\\.*</Source>
+        <Source>.*[/\\]src[/\\].*</Source>
       </Include>
     </Sources>
   </CodeCoverage>
