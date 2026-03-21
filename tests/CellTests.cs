@@ -15,9 +15,9 @@ namespace GameOfLife.Tests
         public void UpdateState_LiveCellWithNoNeighbours_Dies()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[1, 1] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -30,10 +30,10 @@ namespace GameOfLife.Tests
         public void UpdateState_LiveCellWithOneNeighbour_Dies()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[1, 1] = 1;
             grid[0, 0] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -46,11 +46,11 @@ namespace GameOfLife.Tests
         public void UpdateState_LiveCellWithTwoNeighbours_Survives()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[1, 1] = 1;
             grid[0, 0] = 1;
             grid[1, 0] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -63,12 +63,12 @@ namespace GameOfLife.Tests
         public void UpdateState_LiveCellWithThreeNeighbours_Survives()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[1, 1] = 1;
             grid[0, 0] = 1;
             grid[1, 0] = 1;
             grid[2, 0] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -81,13 +81,13 @@ namespace GameOfLife.Tests
         public void UpdateState_LiveCellWithFourNeighbours_Dies()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[1, 1] = 1;
             grid[0, 0] = 1;
             grid[1, 0] = 1;
             grid[2, 0] = 1;
             grid[0, 1] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -100,10 +100,11 @@ namespace GameOfLife.Tests
         public void UpdateState_DeadCellWithTwoNeighbours_StaysDead()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[0, 0] = 1;
             grid[1, 0] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
+            nextGenerationGrid[1, 1] = 1; // force alive so the write to 0 is observable
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -116,11 +117,11 @@ namespace GameOfLife.Tests
         public void UpdateState_DeadCellWithThreeNeighbours_BecomesAlive()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[0, 0] = 1;
             grid[1, 0] = 1;
             grid[2, 0] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -133,12 +134,12 @@ namespace GameOfLife.Tests
         public void UpdateState_DeadCellWithFourNeighbours_StaysDead()
         {
             // Arrange
-            int[,] grid = new int[3, 3];
+            var grid = new int[3, 3];
             grid[0, 0] = 1;
             grid[1, 0] = 1;
             grid[2, 0] = 1;
             grid[0, 1] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(1, 1, grid, nextGenerationGrid);
@@ -154,11 +155,11 @@ namespace GameOfLife.Tests
             // should become alive. This exercises the GetCellState boundary guard.
 
             // Arrange
-            int[,] grid = new int[2, 2];
+            var grid = new int[2, 2];
             grid[1, 0] = 1;
             grid[0, 1] = 1;
             grid[1, 1] = 1;
-            int[,] nextGenerationGrid = (int[,])grid.Clone();
+            var nextGenerationGrid = (int[,])grid.Clone();
 
             // Act
             Cell.UpdateState(0, 0, grid, nextGenerationGrid);
