@@ -6,5 +6,10 @@
         <ModulePath>.*Game-Of-Life\.dll$</ModulePath>
       </Include>
     </ModulePaths>
+    <Sources>
+      <Include>
+        <Source>.*\\src\\.*</Source>
+      </Include>
+    </Sources>
   </CodeCoverage>
 </Configuration>
