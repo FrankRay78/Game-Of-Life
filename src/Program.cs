@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading;
 using GameOfLife.Library;
@@ -10,6 +11,7 @@ namespace GameOfLife
     /// Console implementation of Conway's Game of Life (aka 80's retro style)
     /// </summary>
     /// <see cref="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"/>
+    [ExcludeFromCodeCoverage]
     class Program
     {
         public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0"; //Unicode box character
