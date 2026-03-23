@@ -35,11 +35,11 @@ See `README.md` for build, test, and coverage commands.
 
 | Constant | Default | Purpose |
 |----------|---------|---------|
-| `GRID_WIDTH` | 50 | Grid columns |
-| `GRID_HEIGHT` | 25 | Grid rows |
-| `WAIT` | 100ms | Delay between ticks |
-| `MAXIMUM_GENERATIONS` | 0 | Max generations (0 = unlimited) |
-| `WINDOW_PADDING` | 5 | Console window margin |
+| `GridWidth` | 50 | Grid columns |
+| `GridHeight` | 25 | Grid rows |
+| `Wait` | 100ms | Delay between ticks |
+| `MaximumGenerations` | 0 | Max generations (0 = unlimited) |
+| `WindowPadding` | 5 | Console window margin |
 
 ## Common Commands
 
