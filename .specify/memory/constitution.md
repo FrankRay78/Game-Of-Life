@@ -76,8 +76,10 @@ into `coverage/report/`. Coverage is a signal, not a target — declining covera
 in changed areas MUST be explained before merging.
 
 Only code that is genuinely untestable in a unit context (e.g., console I/O, OS
-window management) MAY carry `[ExcludeFromCodeCoverage]`. Currently only `Program.cs`
-holds this attribute. Adding it elsewhere requires explicit justification in the PR.
+window management) MAY carry `[ExcludeFromCodeCoverage]`. Currently no production
+code carries this attribute — `Program.cs` is in `Game-Of-Life.Console` which is
+outside coverage scope. Adding `[ExcludeFromCodeCoverage]` to library code requires
+explicit justification in the PR.
 
 **Rationale**: Invisible coverage encourages false confidence. Keeping tools pinned
 and runnable with a single command removes the friction that causes coverage to go
@@ -127,9 +129,12 @@ follow this form.
 - **Platform target**: Windows — console rendering uses Windows-specific APIs
   (`Console.WindowWidth`, `Console.WindowHeight`). CA1416 platform-compatibility
   warnings are expected and accepted; they MUST NOT be suppressed wholesale.
-- **Project structure**: Single `.csproj` (OutputType = Exe) containing both
-  production code (`src/`) and tests (`tests/`). No multi-project split (per
-  CIR-001). Changes to this structure require a CIR and a constitution amendment.
+- **Project structure**: Two `.csproj` files (per CIR-003):
+  - `Game-Of-Life.Library` — class library containing all game logic (`src/`) and
+    tests (`tests/`). No dependency on the console host.
+  - `Game-Of-Life.Console` — executable containing only the entry-point (`src/Program.cs`).
+    References `Game-Of-Life.Library` via `ProjectReference`. No MSTest packages.
+  Changes to this structure require a CIR and a constitution amendment.
 - **Build determinism**: `<Deterministic>true</Deterministic>` is set. Builds MUST
   remain deterministic; do not introduce non-deterministic inputs (timestamps,
   random seeds at build time, etc.).
@@ -187,4 +192,4 @@ does not rise to the level of a constitutional principle.
 
 ---
 
-**Version**: 1.1.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-23
+**Version**: 1.2.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-23

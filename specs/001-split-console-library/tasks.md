@@ -18,9 +18,9 @@
 
 **Purpose**: Create both new `.csproj` files and register them in the solution. This is the only prerequisite that blocks US1 and US2.
 
-- [ ] T001 Create `Game-Of-Life.Library/Game-Of-Life.Library.csproj` — `OutputType` omitted (defaults to Library), `TargetFramework=net10.0`, `AssemblyName=Game-Of-Life.Library`, `RootNamespace=GameOfLife.Library`, `Nullable=disable`, `ImplicitUsings=disable`, `Deterministic=true`; include MSTest package references (`Microsoft.NET.Test.Sdk` 18.3.*, `MSTest.TestAdapter` 4.1.*, `MSTest.TestFramework` 4.1.*)
-- [ ] T002 [P] Create `Game-Of-Life.Console/Game-Of-Life.Console.csproj` — `OutputType=Exe`, `TargetFramework=net10.0`, `AssemblyName=Game-Of-Life.Console`, `RootNamespace=GameOfLife`, `Nullable=disable`, `ImplicitUsings=disable`, `Deterministic=true`, `StartupObject=GameOfLife.Program`; include only a `ProjectReference` to `..\Game-Of-Life.Library\Game-Of-Life.Library.csproj` — no MSTest packages
-- [ ] T003 Update `Game-Of-Life.sln` to add both new projects (`Game-Of-Life.Library/Game-Of-Life.Library.csproj` and `Game-Of-Life.Console/Game-Of-Life.Console.csproj`) and remove the old root `Game-Of-Life.csproj` project entry
+- [x] T001 Create `Game-Of-Life.Library/Game-Of-Life.Library.csproj` — `OutputType` omitted (defaults to Library), `TargetFramework=net10.0`, `AssemblyName=Game-Of-Life.Library`, `RootNamespace=GameOfLife.Library`, `Nullable=disable`, `ImplicitUsings=disable`, `Deterministic=true`; include MSTest package references (`Microsoft.NET.Test.Sdk` 18.3.*, `MSTest.TestAdapter` 4.1.*, `MSTest.TestFramework` 4.1.*)
+- [x] T002 [P] Create `Game-Of-Life.Console/Game-Of-Life.Console.csproj` — `OutputType=Exe`, `TargetFramework=net10.0`, `AssemblyName=Game-Of-Life.Console`, `RootNamespace=GameOfLife`, `Nullable=disable`, `ImplicitUsings=disable`, `Deterministic=true`, `StartupObject=GameOfLife.Program`; include only a `ProjectReference` to `..\Game-Of-Life.Library\Game-Of-Life.Library.csproj` — no MSTest packages
+- [x] T003 Update `Game-Of-Life.sln` to add both new projects (`Game-Of-Life.Library/Game-Of-Life.Library.csproj` and `Game-Of-Life.Console/Game-Of-Life.Console.csproj`) and remove the old root `Game-Of-Life.csproj` project entry
 
 **Checkpoint**: Both new projects are registered in the solution. No source files have been moved yet.
 
@@ -34,16 +34,16 @@
 
 ### Implementation for User Story 1
 
-- [ ] T004 [P] [US1] Move `src/Cell.cs` to `Game-Of-Life.Library/src/Cell.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
-- [ ] T005 [P] [US1] Move `src/Helper.cs` to `Game-Of-Life.Library/src/Helper.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
-- [ ] T006 [P] [US1] Move `src/Life.cs` to `Game-Of-Life.Library/src/Life.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
-- [ ] T007 [P] [US1] Move `src/Patterns.cs` to `Game-Of-Life.Library/src/Patterns.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
-- [ ] T008 [P] [US1] Move `tests/CellTests.cs` to `Game-Of-Life.Library/tests/CellTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
-- [ ] T009 [P] [US1] Move `tests/ExamplePatternTests.cs` to `Game-Of-Life.Library/tests/ExamplePatternTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
-- [ ] T010 [P] [US1] Move `tests/HelperTests.cs` to `Game-Of-Life.Library/tests/HelperTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
-- [ ] T011 [P] [US1] Move `tests/LifeTests.cs` to `Game-Of-Life.Library/tests/LifeTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
-- [ ] T012 [US1] Delete the old root `Game-Of-Life.csproj` file and remove the now-empty `src/` and `tests/` root directories (depends on T004–T011)
-- [ ] T013 [US1] Run `dotnet build Game-Of-Life.Library` — verify zero errors and no unexpected warnings; then run `dotnet test Game-Of-Life.Library` — verify all tests pass (depends on T012)
+- [x] T004 [P] [US1] Move `src/Cell.cs` to `Game-Of-Life.Library/src/Cell.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
+- [x] T005 [P] [US1] Move `src/Helper.cs` to `Game-Of-Life.Library/src/Helper.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
+- [x] T006 [P] [US1] Move `src/Life.cs` to `Game-Of-Life.Library/src/Life.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
+- [x] T007 [P] [US1] Move `src/Patterns.cs` to `Game-Of-Life.Library/src/Patterns.cs` and update the file-scoped namespace declaration to `GameOfLife.Library`
+- [x] T008 [P] [US1] Move `tests/CellTests.cs` to `Game-Of-Life.Library/tests/CellTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
+- [x] T009 [P] [US1] Move `tests/ExamplePatternTests.cs` to `Game-Of-Life.Library/tests/ExamplePatternTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
+- [x] T010 [P] [US1] Move `tests/HelperTests.cs` to `Game-Of-Life.Library/tests/HelperTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
+- [x] T011 [P] [US1] Move `tests/LifeTests.cs` to `Game-Of-Life.Library/tests/LifeTests.cs` and update `using GameOfLife;` to `using GameOfLife.Library;`
+- [x] T012 [US1] Delete the old root `Game-Of-Life.csproj` file and remove the now-empty `src/` and `tests/` root directories (depends on T004–T011)
+- [x] T013 [US1] Run `dotnet build Game-Of-Life.Library` — verify zero errors and no unexpected warnings; then run `dotnet test Game-Of-Life.Library` — verify all tests pass (depends on T012)
 
 **Checkpoint**: `Game-Of-Life.Library` builds and all tests pass in complete isolation from the console project.
 
@@ -57,8 +57,8 @@
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Move `src/Program.cs` to `Game-Of-Life.Console/src/Program.cs`; add `using GameOfLife.Library;` at the top; remove the `[ExcludeFromCodeCoverage]` attribute from the class and remove its `using System.Diagnostics.CodeAnalysis;` directive if it is no longer used elsewhere in the file (depends on T013)
-- [ ] T015 [US2] Run `dotnet run --project Game-Of-Life.Console` and confirm the simulation starts, renders the grid, and progresses through generations as before (depends on T014)
+- [x] T014 [US2] Move `src/Program.cs` to `Game-Of-Life.Console/src/Program.cs`; add `using GameOfLife.Library;` at the top; remove the `[ExcludeFromCodeCoverage]` attribute from the class and remove its `using System.Diagnostics.CodeAnalysis;` directive if it is no longer used elsewhere in the file (depends on T013)
+- [x] T015 [US2] Run `dotnet run --project Game-Of-Life.Console` and confirm the simulation starts, renders the grid, and progresses through generations as before (depends on T014)
 
 **Checkpoint**: Full solution builds (`dotnet build`), tests pass (`dotnet test Game-Of-Life.Library`), and simulation runs correctly.
 
@@ -72,9 +72,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T016 [P] [US3] Create `docs/cir/CIR-002.md` — document **Intent** (separate library code from console host), **Behaviour** (given/when/then scenarios from spec US1–US3), **Constraints** (constitution compliance, no logic changes, all tests pass), **Decisions** (single-project alternative rejected because it bundles reusable code inside an executable — the "dirty pattern" the user identified; three-project split rejected because the user specified exactly two)
-- [ ] T017 [P] [US3] Amend `.specify/memory/constitution.md` — in the Technology Stack section, replace the single-project rule with the two-project structure (`Game-Of-Life.Library` + `Game-Of-Life.Console`); remove the prohibition on multi-project splits; remove the sentence about `[ExcludeFromCodeCoverage]` being on `Program.cs` only (it is now removed entirely); update the coverage tooling section to target `Game-Of-Life.Library`; bump version from 1.1.0 to 1.2.0 and update `LAST_AMENDED_DATE` to 2026-03-23
-- [ ] T018 [US3] Update `CLAUDE.md` — update the Tech Stack section and any project-structure references to describe the new two-project layout; update build/test/run commands to use `--project` flags as shown in `quickstart.md` (depends on T016 and T017 for consistency)
+- [x] T016 [P] [US3] Create `docs/cir/CIR-002.md` — document **Intent** (separate library code from console host), **Behaviour** (given/when/then scenarios from spec US1–US3), **Constraints** (constitution compliance, no logic changes, all tests pass), **Decisions** (single-project alternative rejected because it bundles reusable code inside an executable — the "dirty pattern" the user identified; three-project split rejected because the user specified exactly two)
+- [x] T017 [P] [US3] Amend `.specify/memory/constitution.md` — in the Technology Stack section, replace the single-project rule with the two-project structure (`Game-Of-Life.Library` + `Game-Of-Life.Console`); remove the prohibition on multi-project splits; remove the sentence about `[ExcludeFromCodeCoverage]` being on `Program.cs` only (it is now removed entirely); update the coverage tooling section to target `Game-Of-Life.Library`; bump version from 1.1.0 to 1.2.0 and update `LAST_AMENDED_DATE` to 2026-03-23
+- [x] T018 [US3] Update `CLAUDE.md` — update the Tech Stack section and any project-structure references to describe the new two-project layout; update build/test/run commands to use `--project` flags as shown in `quickstart.md` (depends on T016 and T017 for consistency)
 
 **Checkpoint**: CIR-002, amended constitution, and updated CLAUDE.md are all present and consistent with the new layout.
 
@@ -84,9 +84,9 @@
 
 **Purpose**: End-to-end validation that the entire solution is coherent.
 
-- [ ] T019 Run `dotnet build` from the repo root — confirm zero errors; confirm the only CA1416 warnings (if any) are in `Game-Of-Life.Library` rendering code and are accepted per the constitution; confirm no unexpected new warnings
-- [ ] T020 Run `dotnet test Game-Of-Life.Library` one final time from the repo root — confirm all tests pass with zero failures
-- [ ] T021 [P] Review `specs/001-split-console-library/quickstart.md` coverage commands; run `dotnet tool run dotnet-coverage collect "dotnet test Game-Of-Life.Library" -f xml -o coverage/coverage.xml` and confirm it succeeds against the new project path
+- [x] T019 Run `dotnet build` from the repo root — confirm zero errors; confirm the only CA1416 warnings (if any) are in `Game-Of-Life.Library` rendering code and are accepted per the constitution; confirm no unexpected new warnings
+- [x] T020 Run `dotnet test Game-Of-Life.Library` one final time from the repo root — confirm all tests pass with zero failures
+- [x] T021 [P] Review `specs/001-split-console-library/quickstart.md` coverage commands; run `dotnet tool run dotnet-coverage collect "dotnet test Game-Of-Life.Library" -f xml -o coverage/coverage.xml` and confirm it succeeds against the new project path
 
 ---
 

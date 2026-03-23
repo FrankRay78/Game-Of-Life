@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
-    <AssemblyName>Game-Of-Life</AssemblyName>
+    <AssemblyName>Game-Of-Life.Console</AssemblyName>
     <RootNamespace>GameOfLife</RootNamespace>
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -12,9 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.*" />
-    <PackageReference Include="MSTest.TestAdapter" Version="4.1.*" />
-    <PackageReference Include="MSTest.TestFramework" Version="4.1.*" />
+    <ProjectReference Include="..\Game-Of-Life.Library\Game-Of-Life.Library.csproj" />
   </ItemGroup>
 
 </Project>
