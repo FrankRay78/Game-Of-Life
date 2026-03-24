@@ -51,16 +51,24 @@ namespace GameOfLife
             if (Console.WindowWidth < GridWidth + WindowPadding)
             {
                 if (GridWidth + WindowPadding < Console.LargestWindowWidth)
+                {
                     Console.WindowWidth = GridWidth + WindowPadding;
+                }
                 else
+                {
                     Console.WindowWidth = Console.LargestWindowWidth;
+                }
             }
             if (Console.WindowHeight < GridHeight + WindowPadding)
             {
                 if (GridHeight + WindowPadding < Console.LargestWindowHeight)
+                {
                     Console.WindowHeight = GridHeight + WindowPadding;
+                }
                 else
+                {
                     Console.WindowHeight = Console.LargestWindowHeight;
+                }
             }
 
 

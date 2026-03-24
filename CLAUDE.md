@@ -39,6 +39,7 @@ See `README.md` for build, test, and coverage commands.
 | `GridHeight` | 25 | Grid rows |
 | `Wait` | 100ms | Delay between ticks |
 | `MaximumGenerations` | 0 | Max generations (0 = unlimited) |
+| `YOffsetWhenRendering` | 2 | Vertical cursor offset when rendering the grid |
 | `WindowPadding` | 5 | Console window margin |
 
 ## Common Commands

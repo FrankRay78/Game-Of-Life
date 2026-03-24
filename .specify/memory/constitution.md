@@ -25,6 +25,28 @@ Templates reviewed:
 - .specify/templates/commands/                 ✅ no commands directory present
 
 Deferred TODOs: None
+
+==================
+Version change: 1.1.0 → 1.2.0
+
+Modified principles:
+- IV. Code Coverage Visibility — removed: [ExcludeFromCodeCoverage] on Program.cs
+  (attribute no longer present; console project is outside coverage scope entirely)
+
+Expanded sections:
+- Technology Stack — replaced single-project architecture with two-project structure
+  (Game-Of-Life.Library class library + Game-Of-Life.Console executable host);
+  updated coverage tooling to target Game-Of-Life.Library only; ratified per CIR-003
+
+Removed sections: None
+
+Templates reviewed:
+- .specify/templates/plan-template.md          ✅ no updates required
+- .specify/templates/spec-template.md          ✅ no updates required
+- .specify/templates/tasks-template.md         ✅ no updates required
+- .specify/templates/commands/                 ✅ no commands directory present
+
+Deferred TODOs: None
 -->
 
 # Game of Life Constitution
