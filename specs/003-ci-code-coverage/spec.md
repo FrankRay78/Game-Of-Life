@@ -34,24 +34,25 @@ When a contributor submits a pull request, coverage information is surfaced dire
 **Acceptance Scenarios**:
 
 1. **Given** a pull request is opened or updated, **When** the CI run completes, **Then** coverage results are surfaced in the PR in a way that is immediately visible to contributors and reviewers.
-2. **Given** a change reduces coverage below the target threshold, **When** the CI run completes, **Then** [NEEDS CLARIFICATION: should this block the PR merge (fail the check) or appear as advisory information only — i.e., visible but not blocking?]
+2. **Given** a change reduces coverage below the target threshold, **When** the CI run completes, **Then** the coverage comment on the PR reflects the drop as informational — the PR is not blocked from merging.
 3. **Given** a change maintains or improves coverage, **When** the CI run completes, **Then** this is reflected positively in the coverage result shown on the PR.
 
 ---
 
-### User Story 3 - Coverage Enforces the 100% Target (Priority: P2)
+### User Story 3 - Coverage Reported on Every CI Run (Priority: P2)
 
-The CI system tracks the project's stated coverage target of 100% line and branch coverage on core library files. If a change causes coverage to drop, that fact is clearly communicated.
+The CI system posts a coverage comment on every pull request each time a CI run completes. The comment reflects the current state of line and branch coverage across core library files, giving contributors and reviewers an up-to-date picture without needing to seek it out.
 
-**Why this priority**: The project has explicitly set a 100% coverage target. CI should reflect this target and make any regression visible.
+**Why this priority**: A stale or one-time-only comment provides misleading information after subsequent pushes. Posting on every run ensures the comment always reflects the latest code.
 
-**Independent Test**: Can be fully tested by introducing a code change that removes a test and confirming the coverage result reflects the drop.
+**Independent Test**: Can be fully tested by pushing two successive commits to a PR and confirming the coverage comment is refreshed after each run.
 
 **Acceptance Scenarios**:
 
-1. **Given** a PR reduces line or branch coverage on a core library file below 100%, **When** the CI run completes, **Then** the coverage result clearly indicates the shortfall.
-2. **Given** all core library files have 100% line and branch coverage, **When** the CI run completes, **Then** the coverage result confirms the target is met.
-3. **Given** Program.cs changes are included in a PR, **When** coverage is measured, **Then** those changes have no effect on coverage pass/fail status.
+1. **Given** a PR reduces line or branch coverage below 100%, **When** the CI run completes, **Then** the PR comment clearly indicates the shortfall with specific percentages — but the PR remains mergeable.
+2. **Given** all core library files have 100% line and branch coverage, **When** the CI run completes, **Then** the PR comment confirms the target is met.
+3. **Given** a second commit is pushed to the same PR, **When** the new CI run completes, **Then** the coverage comment is updated to reflect the latest run (not duplicated).
+4. **Given** Program.cs changes are included in a PR, **When** coverage is measured, **Then** those changes have no effect on the reported coverage metrics.
 
 ---
 
@@ -68,10 +69,10 @@ The CI system tracks the project's stated coverage target of 100% line and branc
 - **FR-001**: The CI system MUST collect line and branch coverage data automatically as part of the test run, with no additional manual trigger required.
 - **FR-002**: Coverage measurement MUST include all source files in the core library and MUST exclude the console entry point (Program.cs).
 - **FR-003**: The CI system MUST produce a coverage report for each run that is accessible from the CI run view.
-- **FR-004**: Coverage results MUST be surfaced on pull requests in a way that is immediately visible to contributors and reviewers. The mechanism for surfacing results is: [NEEDS CLARIFICATION: should results be posted as an automated PR comment (always visible without navigation), available as a downloadable artifact only, or both?]
-- **FR-005**: The CI system MUST report both line coverage percentage and branch coverage percentage as distinct metrics.
-- **FR-006**: Coverage MUST be measured against the project's defined target of 100% line and branch coverage for core library files.
-- **FR-007**: The CI system MUST clearly indicate when measured coverage falls below the defined 100% target.
+- **FR-004**: The CI system MUST post an automated comment on every pull request each time a CI run completes, containing the current line and branch coverage percentages. If a comment from a previous run already exists, it MUST be updated rather than creating a new one.
+- **FR-005**: The CI system MUST report both line coverage percentage and branch coverage percentage as distinct metrics within the PR comment.
+- **FR-006**: The PR comment MUST clearly indicate when measured coverage is below 100% for any core library file, displayed as informational — coverage shortfalls do not block the PR from being merged.
+- **FR-007**: The CI system MUST NOT fail or block a pull request solely on the basis of a coverage result.
 
 ### Assumptions
 
