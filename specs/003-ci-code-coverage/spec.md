@@ -64,6 +64,20 @@ The CI system posts a coverage comment on every pull request each time a CI run 
 
 ## Requirements *(mandatory)*
 
+### PR Comment Format
+
+The coverage comment posted on each pull request MUST follow this layout:
+
+**### Coverage Report**
+
+| File | Lines | Line % | Branches | Branch % |
+|------|-------|--------|----------|----------|
+| Cell.cs | 45 | 100% | 12 | 100% |
+| Helper.cs | 38 | 100% | 8 | 100% |
+| Life.cs | 62 | 100% | 18 | 100% |
+
+*(Line and branch counts reflect totals in scope; percentages reflect coverage achieved.)*
+
 ### Functional Requirements
 
 - **FR-001**: The CI system MUST collect line and branch coverage data automatically as part of the test run, with no additional manual trigger required.
