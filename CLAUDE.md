@@ -8,6 +8,15 @@ Conway's Game of Life implemented as a C# console application with a retro 80s a
 - **Test framework:** MSTest v4.x
 - **Build/test:** `dotnet` CLI
 
+## Project Structure
+
+| Project | Type | Contents |
+|---------|------|----------|
+| `Game-Of-Life.Library` | Class library | All game logic (`src/`) and tests (`tests/`) |
+| `Game-Of-Life.Console` | Executable | Entry-point only (`src/Program.cs`) |
+
+The console project references the library via `ProjectReference`. Tests run against the library project only.
+
 See `README.md` for build, test, and coverage commands.
 
 ## C# Conventions
@@ -26,15 +35,24 @@ See `README.md` for build, test, and coverage commands.
 
 | Constant | Default | Purpose |
 |----------|---------|---------|
-| `GRID_WIDTH` | 50 | Grid columns |
-| `GRID_HEIGHT` | 25 | Grid rows |
-| `WAIT` | 100ms | Delay between ticks |
-| `MAXIMUM_GENERATIONS` | 0 | Max generations (0 = unlimited) |
-| `WINDOW_PADDING` | 5 | Console window margin |
+| `GridWidth` | 50 | Grid columns |
+| `GridHeight` | 25 | Grid rows |
+| `Wait` | 100ms | Delay between ticks |
+| `MaximumGenerations` | 0 | Max generations (0 = unlimited) |
+| `YOffsetWhenRendering` | 2 | Vertical cursor offset when rendering the grid |
+| `WindowPadding` | 5 | Console window margin |
+
+## Common Commands
+
+```bash
+dotnet build                                        # build entire solution
+dotnet test Game-Of-Life.Library                    # run all tests
+dotnet run --project Game-Of-Life.Console           # run the simulation
+```
 
 ## Adding New Patterns
 
-Add a `public static readonly string` to `src/Patterns.cs` using the digit-string format:
+Add a `public static readonly string` to `Game-Of-Life.Library/src/Patterns.cs` using the digit-string format:
 ```csharp
 namespace GameOfLife.Library
 {
@@ -47,7 +65,7 @@ namespace GameOfLife.Library
     }
 }
 ```
-Then apply it in `src/Program.cs` via `life.ApplyPattern(Patterns.MyPattern, startX, startY)`.
+Then apply it in `Game-Of-Life.Console/src/Program.cs` via `life.ApplyPattern(Patterns.MyPattern, startX, startY)`.
 
 ## Change Intent Records
 

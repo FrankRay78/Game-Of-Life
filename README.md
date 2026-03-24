@@ -11,9 +11,9 @@ Screenshot of the console application running, in this case with an [R_Pentomino
 Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download).
 
 ```bash
-dotnet build    # build the project
-dotnet test     # run all tests
-dotnet run      # start the simulation
+dotnet build                                    # build the solution
+dotnet test Game-Of-Life.Library                # run all tests
+dotnet run --project Game-Of-Life.Console       # start the simulation
 ```
 
 ## Coverage
@@ -27,7 +27,7 @@ dotnet tool restore
 Run tests with coverage collection, then generate the HTML report:
 
 ```bash
-dotnet tool run dotnet-coverage collect --settings coverage.settings.xml "dotnet test" -f cobertura -o coverage/coverage.cobertura.xml
+dotnet tool run dotnet-coverage collect --settings coverage.settings.xml "dotnet test Game-Of-Life.Library" -f cobertura -o coverage/coverage.cobertura.xml
 dotnet tool run reportgenerator "-reports:coverage/coverage.cobertura.xml" "-targetdir:coverage/report" -reporttypes:Html
 ```
 

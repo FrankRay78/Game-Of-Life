@@ -1,7 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using System.Threading;
 using GameOfLife.Library;
 
@@ -11,25 +9,24 @@ namespace GameOfLife
     /// Console implementation of Conway's Game of Life (aka 80's retro style)
     /// </summary>
     /// <see cref="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"/>
-    [ExcludeFromCodeCoverage]
     class Program
     {
-        public const string ALIVE_CELL_PRINT_CHARACTERS = "\u25A0"; //Unicode box character
-        public const string DEAD_CELL_PRINT_CHARACTERS = "-";
+        public const string AliveCellPrintCharacters = "\u25A0"; //Unicode box character
+        public const string DeadCellPrintCharacters = "-";
 
-        const int GRID_WIDTH = 50;
-        const int GRID_HEIGHT = 25;
+        const int GridWidth = 50;
+        const int GridHeight = 25;
 
-        const int WAIT = 100; //time between each tick, in ms
-        const int MAXIMUM_GENERATIONS = 0;
+        const int Wait = 100; //time between each tick, in ms
+        const int MaximumGenerations = 0;
 
-        const int Y_OFFSET_WHEN_RENDERING = 2;
-        const int WINDOW_PADDING = 5;
+        const int YOffsetWhenRendering = 2;
+        const int WindowPadding = 5;
 
 
         static void Main(string[] args)
         {
-            var life = new Life(GRID_WIDTH, GRID_HEIGHT);
+            var life = new Life(GridWidth, GridHeight);
 
 
             //Apply patterns
@@ -51,19 +48,27 @@ namespace GameOfLife
 
 
             //Try and expand the console width and height to accommodate the full grid
-            if (Console.WindowWidth < GRID_WIDTH + WINDOW_PADDING)
+            if (Console.WindowWidth < GridWidth + WindowPadding)
             {
-                if (GRID_WIDTH + WINDOW_PADDING < Console.LargestWindowWidth)
-                    Console.WindowWidth = GRID_WIDTH + WINDOW_PADDING;
+                if (GridWidth + WindowPadding < Console.LargestWindowWidth)
+                {
+                    Console.WindowWidth = GridWidth + WindowPadding;
+                }
                 else
+                {
                     Console.WindowWidth = Console.LargestWindowWidth;
+                }
             }
-            if (Console.WindowHeight < GRID_HEIGHT + WINDOW_PADDING)
+            if (Console.WindowHeight < GridHeight + WindowPadding)
             {
-                if (GRID_HEIGHT + WINDOW_PADDING < Console.LargestWindowHeight)
-                    Console.WindowHeight = GRID_HEIGHT + WINDOW_PADDING;
+                if (GridHeight + WindowPadding < Console.LargestWindowHeight)
+                {
+                    Console.WindowHeight = GridHeight + WindowPadding;
+                }
                 else
+                {
                     Console.WindowHeight = Console.LargestWindowHeight;
+                }
             }
 
 
@@ -91,7 +96,7 @@ namespace GameOfLife
                 //RenderGridToConsole(life.Grid);
                 RenderGridToConsoleDeltasOnly(previousGrid, life.Grid);
 
-                Thread.Sleep(WAIT);
+                Thread.Sleep(Wait);
 
                 if (Console.KeyAvailable)
                 {
@@ -99,7 +104,7 @@ namespace GameOfLife
                     keepGoing = false;
                 }
 
-                if (MAXIMUM_GENERATIONS > 0 && life.Generation >= MAXIMUM_GENERATIONS)
+                if (MaximumGenerations > 0 && life.Generation >= MaximumGenerations)
                 {
                     //break out of the while loop and terminate the console
                     keepGoing = false;
@@ -123,9 +128,9 @@ namespace GameOfLife
         {
             var output = Helper.IntMatrixToString(grid);
 
-            output = output.Replace("1", ALIVE_CELL_PRINT_CHARACTERS).Replace("0", DEAD_CELL_PRINT_CHARACTERS);
+            output = output.Replace("1", AliveCellPrintCharacters).Replace("0", DeadCellPrintCharacters);
 
-            Console.SetCursorPosition(0, Y_OFFSET_WHEN_RENDERING);
+            Console.SetCursorPosition(0, YOffsetWhenRendering);
 
             Console.Write(output);
         }
@@ -154,7 +159,7 @@ namespace GameOfLife
                     if (currentCellValue != nextCellValue)
                     {
                         //Cell value has changed between generations
-                        Console.SetCursorPosition(x, Y_OFFSET_WHEN_RENDERING + y);
+                        Console.SetCursorPosition(x, YOffsetWhenRendering + y);
                         Console.Write(CellValueToChar(nextCellValue));
                     }
                 }
@@ -166,7 +171,7 @@ namespace GameOfLife
         /// </summary>
         private static string CellValueToChar(int cellValue)
         {
-            return cellValue == 1 ? ALIVE_CELL_PRINT_CHARACTERS : DEAD_CELL_PRINT_CHARACTERS;
+            return cellValue == 1 ? AliveCellPrintCharacters : DeadCellPrintCharacters;
         }
 
         #endregion
