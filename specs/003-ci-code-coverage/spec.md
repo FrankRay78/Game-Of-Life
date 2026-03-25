@@ -5,21 +5,29 @@
 **Status**: Draft
 **Input**: User description: "Code Coverage in CI - Extend the CI workflow to collect code coverage during the test run and report results. Uses the existing dotnet-coverage and reportgenerator local tools already configured in the project. Coverage results should be visible on pull requests. The project targets 100% line and branch coverage on core library files (Cell.cs, Helper.cs, Life.cs), with Program.cs excluded from coverage measurement."
 
+## Clarifications
+
+### Session 2026-03-25
+
+- Q: What is the coverage scope? → A: All `.cs` files under `Game-Of-Life.Library/src/` — Program.cs is not in scope (it is in a separate project entirely).
+- Q: Should reportgenerator be used to produce the coverage report? → A: No — extract metrics directly from the XML output produced by dotnet-coverage; do not use reportgenerator.
+- Q: When a second commit is pushed to a PR, should the existing coverage comment be updated or a new one added? → A: Add a new comment for each CI run; do not modify earlier comments.
+- Q: Should coverage CI also run on every branch push, or only on PR events (aligned with spec 002)? → A: PR events only — no coverage run on arbitrary branch pushes.
+
 ## User Scenarios & Testing *(mandatory)*
 
-### User Story 1 - Coverage Collected Automatically on Every Run (Priority: P1)
+### User Story 1 - Coverage Collected Automatically on PR Runs (Priority: P1)
 
-When the CI test run executes, coverage data is automatically collected at the same time. No separate trigger or manual step is required. A developer who pushes code can trust that coverage has been measured as part of the standard validation cycle.
+When the CI test run executes on a pull request, coverage data is automatically collected at the same time. No separate trigger or manual step is required. A developer who opens or updates a PR can trust that coverage has been measured as part of the standard validation cycle.
 
 **Why this priority**: Coverage collection must be seamlessly integrated into the existing test run — it has no value if it requires a manual step or a separate workflow invocation.
 
-**Independent Test**: Can be fully tested by pushing a commit and confirming that a coverage report is produced as an output of the CI run without any additional action.
+**Independent Test**: Can be fully tested by opening a PR and confirming that a coverage report is produced as an output of the CI run without any additional action.
 
 **Acceptance Scenarios**:
 
-1. **Given** a test run is triggered by a push or PR, **When** the run completes, **Then** a coverage report has been produced covering line and branch coverage for the core library files.
+1. **Given** a test run is triggered by a PR event, **When** the run completes, **Then** a coverage report has been produced covering line and branch coverage for all files in `Game-Of-Life.Library/src/`.
 2. **Given** the coverage run completes, **When** a developer views the CI run, **Then** they can access the coverage report without running anything locally.
-3. **Given** Program.cs is part of the project, **When** coverage is measured, **Then** Program.cs is excluded from all coverage metrics and reports.
 
 ---
 
@@ -39,34 +47,33 @@ When a contributor submits a pull request, coverage information is surfaced dire
 
 ---
 
-### User Story 3 - Coverage Reported on Every CI Run (Priority: P2)
+### User Story 3 - New Coverage Comment Added on Every CI Run (Priority: P2)
 
-The CI system posts a coverage comment on every pull request each time a CI run completes. The comment reflects the current state of line and branch coverage across core library files, giving contributors and reviewers an up-to-date picture without needing to seek it out.
+The CI system posts a new coverage comment on the pull request each time a CI run completes. Each comment reflects the current state of line and branch coverage for that run. Earlier comments remain in place, providing a visible history of how coverage changed across commits.
 
-**Why this priority**: A stale or one-time-only comment provides misleading information after subsequent pushes. Posting on every run ensures the comment always reflects the latest code.
+**Why this priority**: Appending a new comment per run gives reviewers a clear, auditable trail of how coverage evolved over the lifetime of the PR without overwriting prior results.
 
-**Independent Test**: Can be fully tested by pushing two successive commits to a PR and confirming the coverage comment is refreshed after each run.
+**Independent Test**: Can be fully tested by pushing two successive commits to a PR and confirming a new coverage comment is added after each run, with the earlier comment still present.
 
 **Acceptance Scenarios**:
 
-1. **Given** a PR reduces line or branch coverage below 100%, **When** the CI run completes, **Then** the PR comment clearly indicates the shortfall with specific percentages — but the PR remains mergeable.
-2. **Given** all core library files have 100% line and branch coverage, **When** the CI run completes, **Then** the PR comment confirms the target is met.
-3. **Given** a second commit is pushed to the same PR, **When** the new CI run completes, **Then** the coverage comment is updated to reflect the latest run (not duplicated).
-4. **Given** Program.cs changes are included in a PR, **When** coverage is measured, **Then** those changes have no effect on the reported coverage metrics.
+1. **Given** a PR has reduced line or branch coverage below 100%, **When** the CI run completes, **Then** the new PR comment clearly indicates the shortfall with specific percentages — but the PR remains mergeable.
+2. **Given** all core library files have 100% line and branch coverage, **When** the CI run completes, **Then** the new PR comment confirms the target is met.
+3. **Given** a second commit is pushed to the same PR, **When** the new CI run completes, **Then** a new coverage comment is posted; the comment from the previous run is not modified or deleted.
 
 ---
 
 ### Edge Cases
 
-- What happens when a new source file is added to the library without any tests — is it automatically included in coverage measurement?
-- What happens if the coverage tooling fails to produce a report — is the CI run treated as failed, or does it continue with a warning?
+- What happens when a new source file is added to `Game-Of-Life.Library/src/` without any tests — is it automatically included in coverage measurement?
+- What happens if the coverage tooling fails to produce an XML report — is the CI run treated as failed, or does it continue with a warning?
 - What happens when coverage is exactly at 100% and a refactor moves code between files — does coverage remain stable across file renames?
 
 ## Requirements *(mandatory)*
 
 ### PR Comment Format
 
-The coverage comment posted on each pull request MUST follow this layout:
+The coverage comment posted on each pull request run MUST follow this layout:
 
 **### Coverage Report**
 
@@ -75,32 +82,33 @@ The coverage comment posted on each pull request MUST follow this layout:
 | Cell.cs | 45 | 100% | 12 | 100% |
 | Helper.cs | 38 | 100% | 8 | 100% |
 | Life.cs | 62 | 100% | 18 | 100% |
+| Patterns.cs | 20 | 100% | 4 | 100% |
 
 *(Line and branch counts reflect totals in scope; percentages reflect coverage achieved.)*
 
 ### Functional Requirements
 
-- **FR-001**: The CI system MUST collect line and branch coverage data automatically as part of the test run, with no additional manual trigger required.
-- **FR-002**: Coverage measurement MUST include all source files in the core library and MUST exclude the console entry point (Program.cs).
-- **FR-003**: The CI system MUST produce a coverage report for each run that is accessible from the CI run view.
-- **FR-004**: The CI system MUST post an automated comment on every pull request each time a CI run completes, containing the current line and branch coverage percentages. If a comment from a previous run already exists, it MUST be updated rather than creating a new one.
+- **FR-001**: The CI system MUST collect line and branch coverage data automatically as part of the test run on every PR event, with no additional manual trigger required.
+- **FR-002**: Coverage measurement MUST include all `.cs` files under `Game-Of-Life.Library/src/` and MUST NOT include any files from outside that path.
+- **FR-003**: Coverage metrics MUST be extracted directly from the XML output file produced by dotnet-coverage; reportgenerator MUST NOT be used.
+- **FR-004**: The CI system MUST post a new automated comment on the pull request each time a CI run completes, containing the current line and branch coverage percentages. Earlier comments from prior runs MUST NOT be modified or deleted.
 - **FR-005**: The CI system MUST report both line coverage percentage and branch coverage percentage as distinct metrics within the PR comment.
-- **FR-006**: The PR comment MUST clearly indicate when measured coverage is below 100% for any core library file, displayed as informational — coverage shortfalls do not block the PR from being merged.
+- **FR-006**: The PR comment MUST clearly indicate when measured coverage is below 100% for any source file, displayed as informational — coverage shortfalls do not block the PR from being merged.
 - **FR-007**: The CI system MUST NOT fail or block a pull request solely on the basis of a coverage result.
 
 ### Assumptions
 
-- Coverage is collected on a single platform (Linux) rather than duplicated across the full OS matrix, since the test suite is deterministic and coverage data is platform-independent for this project.
-- The existing coverage configuration already scopes collection to the correct source files and will be reused without modification.
-- The existing local tool manifest with dotnet-coverage and reportgenerator is committed and will be restored as part of the CI run.
-- "Core library files" refers to the `src/` directory within `Game-Of-Life.Library` — any new source files added there are automatically in scope.
+- Coverage collection runs on Linux only, consistent with the build-and-test workflow defined in spec 002.
+- Coverage is triggered only by PR events (opened, synchronised) targeting master — not on arbitrary branch pushes.
+- Coverage metrics are extracted directly from the XML output produced by dotnet-coverage; reportgenerator is not required.
+- "Core library files" refers to all `.cs` files in `Game-Of-Life.Library/src/` — any new source files added there are automatically in scope without configuration changes.
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
 - **SC-001**: Coverage data is produced on 100% of CI runs that include a test execution step — no run completes without a coverage report.
-- **SC-002**: Program.cs is confirmed excluded — changes to it produce zero effect on coverage metrics.
-- **SC-003**: A drop below 100% line or branch coverage on core library files is surfaced clearly on every affected PR.
+- **SC-002**: Coverage scope is confirmed as all files in `Game-Of-Life.Library/src/` — adding or renaming a file there is automatically reflected in the coverage report with no configuration change.
+- **SC-003**: A drop below 100% line or branch coverage on any in-scope file is surfaced clearly on every affected PR.
 - **SC-004**: Contributors can view coverage results on a PR without downloading files or navigating outside the PR view.
 - **SC-005**: The coverage collection and reporting step adds no more than 2 minutes to the overall CI run duration.
