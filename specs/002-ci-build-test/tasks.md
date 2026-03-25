@@ -18,7 +18,7 @@
 
 **Purpose**: Record the non-obvious platform decision before writing any code — the constitution requires a CIR for decisions that depart from the original spec intent.
 
-- [ ] T001 Write CIR-005 for the Linux-only CI platform decision in `docs/cir/005-linux-only-ci.md`
+- [X] T001 Write CIR-005 for the Linux-only CI platform decision in `docs/cir/005-linux-only-ci.md`
 
   > **CIR content guidance** (Intent, Behaviour, Constraints, Decisions, Date):
   > - **Intent**: Choose the runner platform(s) for the CI workflow
@@ -39,7 +39,7 @@
 
 ### Implementation for User Story 1
 
-- [ ] T002 [US1] Create `.github/workflows/ci.yml` implementing the complete workflow per `specs/002-ci-build-test/contracts/workflow-schema.md`
+- [X] T002 [US1] Create `.github/workflows/ci.yml` implementing the complete workflow per `specs/002-ci-build-test/contracts/workflow-schema.md`
 
   > **Required content** (do not deviate without updating contracts/):
   > - `name: CI`
@@ -51,7 +51,7 @@
   > - Step 4: `dotnet build --no-restore --configuration Release`
   > - Step 5: `dotnet test Game-Of-Life.Library --no-build --configuration Release --verbosity normal`
 
-- [ ] T003 [US1] Verify `.github/workflows/ci.yml` satisfies all functional requirements by tracing each FR in `specs/002-ci-build-test/spec.md` against the workflow:
+- [X] T003 [US1] Verify `.github/workflows/ci.yml` satisfies all functional requirements by tracing each FR in `specs/002-ci-build-test/spec.md` against the workflow:
 
   > **Traceability checklist**:
   > - FR-001: Trigger fires on PR opened/synchronised targeting master → confirm `pull_request.branches: [master]` and `types: [opened, synchronize, reopened]`
@@ -70,7 +70,7 @@
 
 **Purpose**: Post-implementation hygiene and branch protection activation.
 
-- [ ] T004 Confirm branch protection is configured (or documented as pending) — after merging `ci.yml` to `master`, navigate to **Settings → Branches → master** and add `build-and-test` as a required status check per `specs/002-ci-build-test/quickstart.md`
+- [X] T004 Confirm branch protection is configured (or documented as pending) — after merging `ci.yml` to `master`, navigate to **Settings → Branches → master** and add `build-and-test` as a required status check per `specs/002-ci-build-test/quickstart.md`
 
   > This step is a manual repository settings action, not a code change. It cannot be automated in the workflow file. The merge gate (FR-005) is not enforced until this is done.
 
