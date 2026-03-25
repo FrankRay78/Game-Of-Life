@@ -40,17 +40,17 @@ A contributor opens a pull request targeting master. The CI system validates the
 
 ### Functional Requirements
 
-- **FR-001**: The system MUST automatically trigger a build and full test run whenever a pull request targeting master is opened or synchronised (new commits pushed to the PR branch).
+- **FR-001**: The system MUST automatically trigger a build and full test run whenever a pull request targeting master is opened, synchronised (new commits pushed to the PR branch), or reopened.
 - **FR-002**: Each build and test run MUST execute on Linux.
 - **FR-003**: The system MUST report pass/fail status as a named check visible on the pull request.
 - **FR-004**: The system MUST report a count of tests passed, failed, and skipped for each run.
 - **FR-005**: The system MUST prevent a pull request from being merged to master if the build or test check has not passed.
 - **FR-006**: A failed check MUST be re-evaluated automatically when new commits are pushed to the same pull request.
-- **FR-007**: The system MUST complete the full build and test cycle within a reasonable time, providing timely feedback to developers.
+- **FR-007**: The system MUST complete the full build and test cycle within 10 minutes of a PR event, providing timely feedback to developers.
 
 ### Assumptions
 
-- The CI workflow is triggered only by PR events (opened, synchronised) targeting master — it does not run on arbitrary branch pushes.
+- The CI workflow is triggered only by PR events (opened, synchronised, reopened) targeting master (the `synchronize` and `reopened` GitHub event types) — it does not run on arbitrary branch pushes.
 - The master branch is already protected from direct commits via repository branch protection rules; this spec covers the CI workflow behaviour, not the protection configuration.
 - The test suite to be run is the existing MSTest suite in the `Game-Of-Life.Library` project.
 - "Build" means a clean compile of the full solution (both Library and Console projects).
