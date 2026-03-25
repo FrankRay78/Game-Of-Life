@@ -99,7 +99,8 @@ The coverage comment posted on each pull request run MUST follow this layout:
 ### Assumptions
 
 - Coverage collection runs on Linux only, consistent with the build-and-test workflow defined in spec 002.
-- Coverage is triggered only by PR events (opened, synchronised) targeting master — not on arbitrary branch pushes.
+- Coverage is triggered only by PR events (opened, synchronised, reopened) targeting master (the `synchronize` and `reopened` GitHub event types) — not on arbitrary branch pushes.
+- If the coverage tooling fails to produce an XML report, the CI step MUST fail visibly — it must not silently post an empty or malformed comment.
 - Coverage metrics are extracted directly from the XML output produced by dotnet-coverage; reportgenerator is not required.
 - "Core library files" refers to all `.cs` files in `Game-Of-Life.Library/src/` — any new source files added there are automatically in scope without configuration changes.
 
@@ -111,4 +112,3 @@ The coverage comment posted on each pull request run MUST follow this layout:
 - **SC-002**: Coverage scope is confirmed as all files in `Game-Of-Life.Library/src/` — adding or renaming a file there is automatically reflected in the coverage report with no configuration change.
 - **SC-003**: A drop below 100% line or branch coverage on any in-scope file is surfaced clearly on every affected PR.
 - **SC-004**: Contributors can view coverage results on a PR without downloading files or navigating outside the PR view.
-- **SC-005**: The coverage collection and reporting step adds no more than 2 minutes to the overall CI run duration.
