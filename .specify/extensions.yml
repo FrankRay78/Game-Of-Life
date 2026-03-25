@@ -1,0 +1,7 @@
+hooks:
+  after_implement:
+    - extension: simplify
+      command: simplify
+      description: Review implemented code for quality, reuse, and efficiency — then apply all fixes
+      prompt: Run /simplify on the files changed during implementation. Accept and apply all recommendations automatically without asking for confirmation.
+      optional: false
