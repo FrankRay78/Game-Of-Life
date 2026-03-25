@@ -26,7 +26,7 @@
 
       "Bash(cd \"d:/Source/Repos/Game-Of-Life\":*)",
 
-      "Bash(powershell.exe -ExecutionPolicy Bypass -File \".specify/:*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File .specify/:*)",
 
       "Bash(dotnet build:*)",
       "Bash(dotnet run:*)",
@@ -61,7 +61,7 @@
       "Bash(head:*)",
       "Bash(tail:*)",
 
-      "WebFetch(*)",
+      "WebFetch(domain:*)",
       "WebSearch"
     ],
 
