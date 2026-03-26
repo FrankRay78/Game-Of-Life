@@ -12,6 +12,7 @@
 - Q: Should the PR be created immediately without showing a draft or asking for confirmation first? → A: Yes — the command creates the PR directly without any confirmation step.
 - Q: Should the command remind the developer to tag @claude for a code review after PR creation? → A: No — no reminder should be shown.
 - Q: What should the command output after creating the PR? → A: PR URL plus a one-line summary of detected specs and CIRs.
+- Q: Should the slash command be self-contained with full instructions, or thin and referential? → A: Thin — reference `CLAUDE.md` and related convention files by name rather than duplicating their contents; rely on Claude's built-in PR creation knowledge for anything not project-specific.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -74,16 +75,17 @@ When a developer triggers `@claude review` on a PR, Claude applies project-speci
 - **FR-001**: The slash command MUST detect the current branch name and abort with a helpful message if run on `master`.
 - **FR-002**: The slash command MUST identify files added to the branch (not present on master) and extract new spec folders (`specs/*/`) and CIR files (`docs/cir/*.md`).
 - **FR-003**: The slash command MUST infer a PR title from the branch name by stripping any leading number prefix, replacing hyphens with spaces, and applying title case.
-- **FR-004**: The slash command MUST generate a PR body using the standard template structure, pre-filling the Spec and New Artifacts sections with detected artifacts.
+- **FR-004**: The slash command MUST generate a PR body by providing Claude with the detected artifacts (branch name, spec folders, CIR files) and directing it to populate the template sections; the command itself MUST NOT embed the template or convention content.
 - **FR-005**: The slash command MUST create the PR immediately without displaying a draft or requesting confirmation, then output the PR URL followed by a one-line summary of the artifacts detected (e.g. `Detected: specs/004-raise-pr-command, docs/cir/006-slug.md`).
 - **FR-006**: A GitHub PR template MUST be present at `.github/pull_request_template.md` so that all PRs opened against master are pre-filled with the standard structure.
 - **FR-007**: A `REVIEW.md` file MUST exist at the repo root encoding project-specific review rules for Claude (conventions to always check, key invariants, files to skip).
 - **FR-008**: `REVIEW.md` MUST instruct Claude to read and honour the "Claude Review Notes" section of the PR description when present.
+- **FR-009**: The slash command MUST be concise — it MUST reference `CLAUDE.md`, `docs/conventions/general-principles.md`, and `REVIEW.md` by name for project context rather than reproducing their contents inline.
 
 ### Key Entities
 
 - **PR Template**: The structured GitHub PR description template with sections for Summary, Spec, New Artifacts, Claude Review Notes, and Checklist.
-- **Slash Command**: A `.claude/commands/raise-pr.md` file that Claude Code executes when the developer invokes `/raise-pr`.
+- **Slash Command**: A concise `.claude/commands/raise-pr.md` file that Claude Code executes when the developer invokes `/raise-pr`. It provides only project-specific context (artifact detection logic, file references) and delegates PR body generation to Claude's built-in knowledge.
 - **REVIEW.md**: A repo-root guidance file read by Claude during PR review, encoding project conventions and invariants.
 - **Spec Folder**: A directory under `specs/NNN-slug/` containing `spec.md`, `plan.md`, and `tasks.md` for a tracked feature.
 - **CIR File**: A Change Intent Record document under `docs/cir/NNN-slug.md` documenting a non-obvious decision.
