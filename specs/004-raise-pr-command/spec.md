@@ -64,7 +64,7 @@ When a developer triggers `@claude review` on a PR, Claude applies project-speci
 ### Edge Cases
 
 - What happens when the command is run on the `master` branch? The command should abort immediately with a clear message.
-- What happens when no commits exist between the current branch and master? The command should produce an empty summary section and still create the PR.
+- What happens when no commits exist between the current branch and master? The command should abort with a clear message — raising a PR for zero changes is not meaningful.
 - What happens if `gh` CLI is not authenticated? The command should surface the error from `gh pr create` clearly.
 - What happens if a PR already exists for the current branch? `gh pr create` will fail; the command should catch and report this gracefully.
 
