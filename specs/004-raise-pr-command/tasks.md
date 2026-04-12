@@ -26,7 +26,7 @@ No project initialization required. All target directories (`.github/`, `.claude
 
 **⚠️ CRITICAL**: US1 (slash command) must not be implemented until this phase is complete.
 
-- [ ] T001 Create `.github/pull_request_template.md` with five sections: Summary (with HTML comment guidance), Spec (link to spec folder or N/A), New Artifacts (two unticked checkboxes for spec folder and CIR), Claude Review Notes (HTML comment with example hints), and Checklist (CI passes, tests named correctly, CIR written, CLAUDE.md updated if needed)
+- [x] T001 Create `.github/pull_request_template.md` with five sections: Summary (with HTML comment guidance), Spec (link to spec folder or N/A), New Artifacts (two unticked checkboxes for spec folder and CIR), Claude Review Notes (HTML comment with example hints), and Checklist (CI passes, tests named correctly, CIR written, CLAUDE.md updated if needed)
 
 **Checkpoint**: PR template exists — US1 and US2 implementation can now proceed.
 
@@ -38,8 +38,8 @@ No project initialization required. All target directories (`.github/`, `.claude
 
 **Independent Test**: Check out any feature branch with at least one new spec folder or CIR file. Run `/raise-pr`. Verify: (a) the created PR body contains linked references to the detected artifacts, (b) the PR URL is output, (c) a `Detected:` summary line is shown, (d) no confirmation prompt was presented.
 
-- [ ] T002 [US1] Create `.claude/commands/raise-pr.md` — concise YAML-frontmatter command implementing the 8 steps per `specs/004-raise-pr-command/contracts/raise-pr-command.md`: branch guard (abort if `master`), added-file detection, spec/CIR extraction, commit list, title inference, body construction using `.github/pull_request_template.md` structure, `gh pr create`, and URL + detection output. Zero-commit guard: if `git log master..HEAD` returns no commits, abort with message "No commits found on this branch compared to master — nothing to raise a PR for." Preamble must reference `CLAUDE.md` and `docs/conventions/general-principles.md` by name; must not reproduce their content inline.
-- [ ] T003 [P] [US1] Update `.claude/settings.json`: add `"Bash(git rev-parse:*)"` to the `allow` array; add `"Bash(gh pr merge:*)"` and `"Bash(gh pr checkout:*)"` to the `ask` array
+- [x] T002 [US1] Create `.claude/commands/raise-pr.md` — concise YAML-frontmatter command implementing the 8 steps per `specs/004-raise-pr-command/contracts/raise-pr-command.md`: branch guard (abort if `master`), added-file detection, spec/CIR extraction, commit list, title inference, body construction using `.github/pull_request_template.md` structure, `gh pr create`, and URL + detection output. Zero-commit guard: if `git log master..HEAD` returns no commits, abort with message "No commits found on this branch compared to master — nothing to raise a PR for." Preamble must reference `CLAUDE.md` and `docs/conventions/general-principles.md` by name; must not reproduce their content inline.
+- [x] T003 [P] [US1] Update `.claude/settings.json`: add `"Bash(git rev-parse:*)"`, `"Bash(git diff:*)"`, `"Bash(git log:*)"`, and `"Bash(gh pr create:*)"` to the `allow` array
 
 **Checkpoint**: Run `/raise-pr` on `004-raise-pr-command` branch to validate US1 end-to-end.
 
@@ -53,7 +53,7 @@ No project initialization required. All target directories (`.github/`, `.claude
 
 **Note**: GitHub reads the PR template from the base branch (master). The template takes effect only once this branch is merged. The implementation task was completed in Phase 2 (T001). This phase validates correctness.
 
-- [ ] T004 [US2] Review `.github/pull_request_template.md` content against the plan.md Phase 1 design: confirm all five sections are present, HTML comments are author-facing guidance (not rendered), and the file contains no implementation details or content duplicated from `CLAUDE.md`
+- [x] T004 [US2] Review `.github/pull_request_template.md` content against the plan.md Phase 1 design: confirm all five sections are present, HTML comments are author-facing guidance (not rendered), and the file contains no implementation details or content duplicated from `CLAUDE.md`
 
 **Checkpoint**: Template content verified. GitHub injection will be active after merge to master.
 
@@ -65,7 +65,7 @@ No project initialization required. All target directories (`.github/`, `.claude
 
 **Independent Test**: With `REVIEW.md` in place, trigger `@claude review` on any PR. Verify Claude's response references the grid invariant (`grid[x, y]`) or test naming pattern (`MethodName_Scenario_ExpectedResult`) without those rules having been stated in the PR body.
 
-- [ ] T005 [US3] Create `REVIEW.md` at repo root with three sections: How to Prioritise (read Claude Review Notes first, then spec link if present, then invariant checks, then conventions), Skip Unconditionally (`TestResults/`, `coverage/`, `bin/`, `obj/`, generated files), Reference Documents (links to `CLAUDE.md` and `docs/conventions/csharp.md`). Must not reproduce convention or invariant content inline — reference files by name only.
+- [x] T005 [US3] Create `REVIEW.md` at repo root with three sections: How to Prioritise (read Claude Review Notes first, then spec link if present, then invariant checks, then conventions), Skip Unconditionally (`TestResults/`, `coverage/`, `bin/`, `obj/`, generated files), Reference Documents (links to `CLAUDE.md` and `docs/conventions/csharp.md`). Must not reproduce convention or invariant content inline — reference files by name only.
 
 **Checkpoint**: REVIEW.md present with exactly three sections, no inlined convention content.
 
@@ -73,7 +73,7 @@ No project initialization required. All target directories (`.github/`, `.claude
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T006 Write CIR at `docs/cir/006-raise-pr-no-confirmation.md` documenting the no-confirmation design decision per the CIR template in `docs/conventions/general-principles.md`. Required by Constitution Principle V before this branch is merged.
+- [x] T006 Write CIR at `docs/cir/006-raise-pr-no-confirmation.md` documenting the no-confirmation design decision per the CIR template in `docs/conventions/general-principles.md`. Required by Constitution Principle V before this branch is merged.
 
 ---
 
