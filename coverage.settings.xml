@@ -3,7 +3,7 @@
   <CodeCoverage>
     <ModulePaths>
       <Include>
-        <ModulePath>.*Game-Of-Life\.dll$</ModulePath>
+        <ModulePath>.*Game-Of-Life\.Library\.dll$</ModulePath>
       </Include>
     </ModulePaths>
     <Sources>
