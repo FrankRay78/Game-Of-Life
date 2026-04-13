@@ -1,4 +1,4 @@
-# Game of Life
+﻿# Game of Life
 
 Conway's Game of Life implemented as a C# console application with a retro 80s aesthetic.
 
