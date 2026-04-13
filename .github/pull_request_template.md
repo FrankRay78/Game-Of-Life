@@ -31,10 +31,3 @@
 ## Claude Review Notes
 
 
-
-## Checklist
-
-- [ ] CI passes
-- [ ] New tests follow `MethodName_Scenario_ExpectedResult` naming
-- [ ] CIR written for any non-obvious decisions (`docs/cir/`)
-- [ ] `CLAUDE.md` updated if project setup or conventions changed

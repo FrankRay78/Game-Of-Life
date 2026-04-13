@@ -24,7 +24,6 @@ Read `CLAUDE.md` and `docs/conventions/general-principles.md` for project contex
    - Tick the spec checkbox if a spec folder was detected; leave it unticked if not
    - Tick the CIR checkbox if a CIR file was detected; leave it unticked if not
    - Leave Claude Review Notes blank
-   - Leave all Checklist items unticked
 
 7. **Create PR**: Run `gh pr create --title "<inferred title>" --body "<pr body>"` using the values from steps 5 and 6.
 
