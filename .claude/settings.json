@@ -106,7 +106,7 @@
           {
             "type": "command",
             "if": "Bash(git commit:*)",
-            "command": "STAGED=$(git diff --cached --name-only | grep \"[.]cs$\"); [ -z \"$STAGED\" ] && exit 0; dotnet format style && dotnet format whitespace && echo \"$STAGED\" | xargs git add",
+            "command": "STAGED=$(git diff --cached --name-only | grep \"[.]cs$\"); [ -z \"$STAGED\" ] && exit 0; INCLUDE=$(echo \"$STAGED\" | tr '\\n' ' '); dotnet format style --include $INCLUDE && dotnet format whitespace --include $INCLUDE && echo \"$STAGED\" | xargs -d '\\n' git add",
             "statusMessage": "Formatting staged .cs files..."
           },
           {
